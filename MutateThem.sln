@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutateThem", "MutateThem.csproj", "{FA11877D-E148-4627-B8F0-00602566A672}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA11877D-E148-4627-B8F0-00602566A672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA11877D-E148-4627-B8F0-00602566A672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA11877D-E148-4627-B8F0-00602566A672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA11877D-E148-4627-B8F0-00602566A672}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F10F97C7-E8A2-46DE-A7CB-6D6DEF388B9D}
+	EndGlobalSection
+EndGlobal
