@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\MutateThem.csproj": {}
+    "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\src\\MutateThem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\MutateThem.csproj": {
+    "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\src\\MutateThem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\MutateThem.csproj",
+        "projectUniqueName": "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\src\\MutateThem.csproj",
         "projectName": "MutateThem",
-        "projectPath": "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\MutateThem.csproj",
+        "projectPath": "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\src\\MutateThem.csproj",
         "packagesPath": "C:\\Users\\Jorven\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\obj\\",
+        "outputPath": "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\src\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
