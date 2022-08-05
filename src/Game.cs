@@ -17,7 +17,7 @@ namespace MutateThem
             Raylib.SetTargetFPS(162);
 
             Player player = new Player();
-
+            Enemy enemy = new Enemy(player);
             while (!Raylib.WindowShouldClose())
             {
                 player.Work();
@@ -25,6 +25,7 @@ namespace MutateThem
                 Raylib.ClearBackground(Color.BLACK);
 
                 //Player player = new Player();
+                enemy.Draw();
                 player.Draw();
                 //player.Draw();
                 //Raylib.DrawText("Hello, world!", 12, 12, 20, Color.WHITE);
