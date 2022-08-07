@@ -10,11 +10,12 @@ namespace MutateThem.Some_things
 {
     public class Player : Something
     {
+        public bool IsPlaying { get; set; }
         public Player()
         {
             loc = new Vector2[1];
             loc[0] = new(Raylib.GetScreenWidth() / 2.0f, Raylib.GetScreenHeight() / 2.0f);
-
+            IsPlaying = false;
             radius = 40;
             colour = Color.SKYBLUE;
         }
@@ -25,6 +26,7 @@ namespace MutateThem.Some_things
             Vector2 input = new(x, y);
             if (input != Vector2.Zero)
             {
+                IsPlaying = true;
                 input = Vector2.Normalize(input);
             }
 
