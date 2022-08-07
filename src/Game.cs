@@ -35,7 +35,7 @@ namespace MutateThem
                 Raylib.ClearBackground(Color.BLACK);
                 if (Raylib.IsKeyPressed(KeyboardKey.KEY_K))
                 {
-                    enemy.ScatterThem(15);
+                    enemy.ScatterThem(5);
                 }
                 /*
                 Raylib.DrawText(enemy.directionX.ToString(), 12, 10, 30, Color.WHITE);
