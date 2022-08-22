@@ -8,16 +8,15 @@ using Raylib_cs;
 
 namespace MutateThem
 {
-    class Game
+    class Windows
     {
         public void Run()
         {
             Raylib.InitWindow(1280, 720, "Hello World");
 
             Raylib.SetTargetFPS(162);
-
             Player player = new Player();
-            Enemy enemy = new Enemy(player);
+            Enemy enemy = new Enemy();
             while (!Raylib.WindowShouldClose())
             {
                 /*
@@ -35,7 +34,7 @@ namespace MutateThem
                 Raylib.ClearBackground(Color.BLACK);
                 if (Raylib.IsKeyPressed(KeyboardKey.KEY_K))
                 {
-                    enemy.ScatterThem(5);
+                    enemy.ScatterThem(15);
                 }
                 /*
                 Raylib.DrawText(enemy.directionX.ToString(), 12, 10, 30, Color.WHITE);
