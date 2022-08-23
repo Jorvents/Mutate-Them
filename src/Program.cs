@@ -7,7 +7,7 @@ namespace MutateThem
     {
         static void Main(string[] args)
         {
-            Windows code = new Windows();
+            Game code = new Game();
             code.Run();
         }
     }

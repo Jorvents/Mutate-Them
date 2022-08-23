@@ -12,17 +12,17 @@ namespace MutateThem.Some_things
     public class Enemy : Something
     {
         public int count { get; set; }
-        public Vector2 target { get; set;}
+        public Vector2 target { get; set; }
         public Vector2 direction { get; set; }
         public Vector2 farness { get; set; }
         public Player MyEnemy { get; set; }
         public float speed { get; set; }
-        //public Enemy[] enemies { get; set; }
+        public Enemy[] enemies { get; set; }
         //public Vector2[] vector2s { get; set; }
-        public Enemy(/*Player player*/)
+        public Enemy(Player player)
         {
             ScatterThem(5);
-            //MyEnemy = player;
+            MyEnemy = player;
             //player.loc[0] = target;
             //loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
             speed = 80;
@@ -41,7 +41,7 @@ namespace MutateThem.Some_things
                     loc[i] += direction * -speed * Raylib.GetFrameTime();
                     if (Raylib.CheckCollisionCircles(MyEnemy.loc[0], MyEnemy.radius, loc[i], this.radius))
                     {
-                        loc[i] = new(9999.0f, 9999.0f);
+                        loc[i] = new Vector2(9999.9f, 9999.9f);
                     }
                 }
 
@@ -52,16 +52,31 @@ namespace MutateThem.Some_things
         }
         public void ScatterThem(int count)
         {
+            //this.count = count;
             this.count = count;
-            loc = new Vector2[this.count];
+            //this.count = count;
+            loc = new Vector2[count];
+            //enemies = new Enemy[this.count];
+            //enemies.loc = new Vector2[this.count];
 
             var rndm = new Random();
 
             for (int i = 0; i < count; i++)
             {
                 loc[i] = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
-            }
-        }
 
+                /*
+                enemies[i] = new Enemy(MyEnemy);
+                enemies[i].loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
+                //loc[i] = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
+                //enemies = new Enemy[i];
+                /*
+                enemies[i] ??= new Enemy(MyEnemy);
+                enemies[i].loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
+                */
+            }
+
+        }
     }
 }
+
