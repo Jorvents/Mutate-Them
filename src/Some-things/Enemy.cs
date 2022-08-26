@@ -19,10 +19,10 @@ namespace MutateThem.Some_things
         public float speed { get; set; }
         public Enemy[] enemies { get; set; }
         //public Vector2[] vector2s { get; set; }
-        public Enemy(Player player)
+        public Enemy(/*Player player*/)
         {
             ScatterThem(5);
-            MyEnemy = player;
+            //MyEnemy = player;
             //player.loc[0] = target;
             //loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
             speed = 80;

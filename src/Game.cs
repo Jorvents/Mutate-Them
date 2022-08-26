@@ -1,59 +1,54 @@
-﻿using System;
+﻿using MutateThem.Some_things;
+using Raylib_cs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MutateThem.Some_things;
-using Raylib_cs;
 
 namespace MutateThem
 {
-    class Game
+    internal class Game
     {
-        public void Run()
+        Player player;
+        Enemy enemy;
+        public Game(Player player, Enemy enemy)
         {
-            Raylib.InitWindow(1280, 720, "Hello World");
-
-            Raylib.SetTargetFPS(162);
-
+            this.player = player;
+            this.enemy = enemy;
+            this.enemy.MyEnemy = player;
+            /*
             Player player = new Player();
             Enemy enemy = new Enemy(player);
-            while (!Raylib.WindowShouldClose())
+            */
+        }
+        public void Init()
+        {
+
+        }
+        public void justRun()
+        {
+            Work();
+            Play();
+            Draw();
+
+        }
+        void Play()
+        {
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_K))
             {
-                /*
-                VrStereoConfig VRconfig = new VrStereoConfig();
-                VRconfig.projection1.M23 = 10;
-                VRconfig.projection2.M23 = 20;
-                VRconfig.leftLensCenter.X = 30;
-                VRconfig.rightLensCenter.X = 40;
-
-                Raylib.BeginVrStereoMode(VRconfig);
-                */
-                player.Work();
-                enemy.Work();
-                Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.BLACK);
-                if (Raylib.IsKeyPressed(KeyboardKey.KEY_K))
-                {
-                    enemy.ScatterThem(5);
-                }
-                /*
-                Raylib.DrawText(enemy.directionX.ToString(), 12, 10, 30, Color.WHITE);
-                Raylib.DrawText(enemy.directionY.ToString(), 12, 40, 30, Color.WHITE);
-                Raylib.DrawText(enemy.farness.X.ToString(), 12, Raylib.GetScreenHeight() - 70, 30, Color.WHITE);
-                Raylib.DrawText(enemy.farness.Y.ToString(), 12, Raylib.GetScreenHeight() - 30, 30, Color.WHITE);
-                */
-                //Player player = new Player();
-                enemy.Draw();
-                player.Draw();
-                //Raylib.DrawText(Raylib.GetFPS().ToString(), 12, 12, 20, Color.WHITE);
-                //player.Draw();
-                //Raylib.DrawText("Hello, world!", 12, 12, 20, Color.WHITE);
-                //Raylib.EndVrStereoMode();
-                Raylib.EndDrawing();
+                enemy.ScatterThem(5);
             }
-
-            Raylib.CloseWindow();
+        }
+        void Work()
+        {
+            player.Work();
+            enemy.Work();
+        }
+        void Draw()
+        {
+            player.Draw();
+            enemy.Draw();
         }
     }
 }
