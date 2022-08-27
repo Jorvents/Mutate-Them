@@ -13,12 +13,12 @@ namespace MutateThem.Some_things
         public bool IsPlaying { get; set; }
         public Player()
         {
-            loc = new Vector2[1];
+            loc = new Vector2();
             /*
             loc = new Vector2[1];
             loc[0] = new(Raylib.GetScreenWidth() / 2.0f, Raylib.GetScreenHeight() / 2.0f);
             */
-            loc[0] = new(Raylib.GetScreenWidth() / 2.0f, Raylib.GetScreenHeight() / 2.0f);
+            loc = new(Raylib.GetScreenWidth() / 2.0f, Raylib.GetScreenHeight() / 2.0f);
             IsPlaying = false;
             radius = 40;
             colour = Color.SKYBLUE;
@@ -35,7 +35,7 @@ namespace MutateThem.Some_things
             }
 
             //loc[0] += input * 300 * Raylib.GetFrameTime();
-            loc[0] += input * 300 * Raylib.GetFrameTime();
+            loc += input * 300 * Raylib.GetFrameTime();
 
             /*
             if (Raylib.IsKeyDown(Raylib_cs.KeyboardKey.KEY_W)) 

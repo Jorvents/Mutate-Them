@@ -17,65 +17,52 @@ namespace MutateThem.Some_things
         public Vector2 farness { get; set; }
         public Player MyEnemy { get; set; }
         public float speed { get; set; }
-        public Enemy[] enemies { get; set; }
         //public Vector2[] vector2s { get; set; }
         public Enemy(/*Player player*/)
         {
-            ScatterThem(5);
+            //ScatterThem(5);
             //MyEnemy = player;
             //player.loc[0] = target;
             //loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
+            /*
+            var rndm = new Random();
+            loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
+            */
+            /*
+            var rndm = new Random();
+            loc =  new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
+            */
             speed = 80;
             radius = 30;
             colour = Raylib_cs.Color.RED;
         }
         public void Work()
         {
-            if (MyEnemy.IsPlaying)
+            if (this.MyEnemy.IsPlaying)
             {
+                target = this.MyEnemy.loc;
+                farness = loc - target;
+                direction = Vector2.Normalize(farness);
+                loc += direction * -speed * Raylib.GetFrameTime();
+                if (Raylib.CheckCollisionCircles(this.MyEnemy.loc, this.MyEnemy.radius, loc, this.radius))
+                {
+                    //loc = new Vector2(9999.9f, 9999.9f);
+                    isDead = true;
+                }
+                /*
                 for (int i = 0; i < count; i++)
                 {
-                    target = MyEnemy.loc[0];
-                    farness = loc[i] - target;
+                    target = MyEnemy.loc;
+                    farness = loc - target;
                     direction = Vector2.Normalize(farness);
-                    loc[i] += direction * -speed * Raylib.GetFrameTime();
-                    if (Raylib.CheckCollisionCircles(MyEnemy.loc[0], MyEnemy.radius, loc[i], this.radius))
+                    loc += direction * -speed * Raylib.GetFrameTime();
+                    if (Raylib.CheckCollisionCircles(MyEnemy.loc, MyEnemy.radius, loc, this.radius))
                     {
-                        loc[i] = new Vector2(9999.9f, 9999.9f);
+                        loc = new Vector2(9999.9f, 9999.9f);
                     }
                 }
-
-            }
-            //directionX = farness.X / farness.Y;
-            //directionY = farness.Y / farness.X;
-            //direction = new(farness.X, farness.X);
-        }
-        public void ScatterThem(int count)
-        {
-            //this.count = count;
-            this.count = count;
-            //this.count = count;
-            loc = new Vector2[count];
-            //enemies = new Enemy[this.count];
-            //enemies.loc = new Vector2[this.count];
-
-            var rndm = new Random();
-
-            for (int i = 0; i < count; i++)
-            {
-                loc[i] = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
-
-                /*
-                enemies[i] = new Enemy(MyEnemy);
-                enemies[i].loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
-                //loc[i] = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
-                //enemies = new Enemy[i];
-                /*
-                enemies[i] ??= new Enemy(MyEnemy);
-                enemies[i].loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
                 */
             }
-
         }
     }
 }

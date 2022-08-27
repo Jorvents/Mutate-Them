@@ -17,8 +17,8 @@ namespace MutateThem
             Raylib.SetTargetFPS(162);
 
             Player player = new Player();
-            Enemy enemy = new Enemy();
-            Game game = new Game(player, enemy);
+            //Enemy enemy = new Enemy();
+            Game game = new Game(player/*, enemy*/);
             while (!Raylib.WindowShouldClose())
             {
                 /*
@@ -30,7 +30,10 @@ namespace MutateThem
 
                 Raylib.BeginVrStereoMode(VRconfig);
                 */
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.BLACK);
                 game.justRun();
+                Raylib.EndDrawing();
                 /*
                 player.Work();
                 enemy.Work();
@@ -57,7 +60,6 @@ namespace MutateThem
                 //Raylib.DrawText("Hello, world!", 12, 12, 20, Color.WHITE);
                 //Raylib.EndVrStereoMode();
                 */
-                Raylib.EndDrawing();
 
             }
 
