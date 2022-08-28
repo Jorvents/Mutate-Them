@@ -19,7 +19,7 @@ namespace MutateThem
         {
             isDead = false;
         }
-
+        /*
         public void Draw()
         {
             //loc.X += MoveX * Raylib.GetFrameTime();

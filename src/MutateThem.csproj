@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Info\" />
+    <Folder Include="Files\Sprites\" />
   </ItemGroup>
 
 </Project>
