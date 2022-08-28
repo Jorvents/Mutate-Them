@@ -33,14 +33,15 @@ namespace MutateThem
         {
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_K))
             {
-                ScatterThem(500);
+                player.IsPlaying = false;
+                ScatterThem(1);
             }
 
         }
         void Work()
         {
-            player.Work();
             player.HandRotation = Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY()) + 135;
+            player.Work();
             foreach (Enemy enemy in enemies)
             {
                 //enemyz.MyEnemy = player;
@@ -49,6 +50,7 @@ namespace MutateThem
         }
         void Draw()
         {
+            Raylib.DrawText(Raylib.GetFPS().ToString(), 15, 15, 30, Color.WHITE);
             player.Draw();
             //Raylib.DrawLine((int)player.loc.X, (int)player.loc.Y, Raylib.GetMouseX(), Raylib.GetMouseY(), Color.YELLOW);
             foreach (Enemy enemy in enemies)

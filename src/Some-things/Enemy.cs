@@ -27,29 +27,19 @@ namespace MutateThem.Some_things
         {
             if (MyEnemy.IsPlaying)
             {
-                target = MyEnemy.loc;
-                farness = loc - target;
-                direction = Vector2.Normalize(farness);
-                loc += direction * -speed * Raylib.GetFrameTime();
-                if (Raylib.CheckCollisionCircles(MyEnemy.loc, MyEnemy.radius, loc, radius))
-                {
-                    //loc = new Vector2(9999.9f, 9999.9f);
-                    isDead = true;
-                    loc = new Vector2();
-                }
-                /*
-                for (int i = 0; i < count; i++)
+                if (!isDead)
                 {
                     target = MyEnemy.loc;
                     farness = loc - target;
                     direction = Vector2.Normalize(farness);
                     loc += direction * -speed * Raylib.GetFrameTime();
-                    if (Raylib.CheckCollisionCircles(MyEnemy.loc, MyEnemy.radius, loc, this.radius))
+                    if (Raylib.CheckCollisionCircles(MyEnemy.loc, MyEnemy.radius, loc, radius))
                     {
-                        loc = new Vector2(9999.9f, 9999.9f);
+                        //loc = new Vector2(9999.9f, 9999.9f);
+                        isDead = true;
+                        //loc = new Vector2();
                     }
                 }
-                */
             }
         }
         public void Draw()

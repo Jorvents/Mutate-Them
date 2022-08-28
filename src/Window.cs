@@ -12,7 +12,12 @@ namespace MutateThem
     {
         public void Run()
         {
-            Raylib.InitWindow(1280, 720, "Hello World");
+
+            Raylib.InitWindow(1280, 720, "Mutate them!");
+
+            Image icon = Raylib.LoadImage("Files/Sprites/Icon.png");
+
+            Raylib.SetWindowIcon(icon);
 
             Raylib.SetTargetFPS(162);
 
@@ -27,6 +32,7 @@ namespace MutateThem
                 Raylib.EndDrawing();
 
             }
+            Raylib.UnloadImage(icon);
             Raylib.UnloadTexture(player.playerHands);
 
             Raylib.CloseWindow();

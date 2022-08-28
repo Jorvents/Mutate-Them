@@ -13,8 +13,9 @@ namespace MutateThem.Some_things
         public bool IsPlaying { get; set; }
         public Texture2D playerHands { get; set; }
         public float HandRotation { get; set; }
-        Rectangle Hands;
-        Rectangle Orging;
+        Vector2 OrginOfHands { get; set; }
+        Rectangle Hands { get; set; }
+        Rectangle Desging { get; set; }
         public Player()
         {
             loc = new Vector2();
@@ -27,16 +28,9 @@ namespace MutateThem.Some_things
 
             playerHands = Raylib.LoadTexture("Files/Sprites/PlayerHands.png");
             HandRotation = 0.14f;
-            Hands = new Rectangle();
-            Hands.x = 0;
-            Hands.y = 0;
-            Hands.height = 600;
-            Hands.width = 600;
-            Orging = new Rectangle();
-            Hands.x = 300;
-            Hands.y = 0;
-            Hands.height = 600;
-            Hands.width = 600;
+            Hands = new Rectangle(0.0f, 0.0f, 600.0f, 600.0f); //DONT CHANGE
+            Desging = new Rectangle(loc.X, loc.Y, 100.0f, 100.0f);
+            OrginOfHands = new Vector2(45, 90);
             //Raylib.UnloadTexture(playerHands);
         }
         public void Work()
@@ -51,14 +45,16 @@ namespace MutateThem.Some_things
                 input = Vector2.Normalize(input);
             }
             loc += input * 300 * Raylib.GetFrameTime();
+            Desging = new Rectangle(loc.X, loc.Y, 90.0f, 90.0f);
         }
         public void Draw()
         {
 
             if (isDead) return;
             Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
-            Raylib.DrawTextureEx(playerHands, loc, HandRotation, 0.14f, Color.WHITE);
-            //Raylib.DrawTexturePro(playerHands, Orging, Hands, -loc, 0.0f, Color.YELLOW);
+            //Raylib.DrawTextureEx(playerHands, loc, HandRotation, 0.14f, Color.WHITE);
+            Raylib.DrawTexturePro(playerHands, Hands, Desging, OrginOfHands, HandRotation + 134, Color.YELLOW);
+            //Raylib.DrawText(Desging.height.ToString(), 15, 15, 30, Color.WHITE);
             //Raylib.DrawText(playerHands.height.ToString(), 15, 15, 30, Color.WHITE);
         }
     }
