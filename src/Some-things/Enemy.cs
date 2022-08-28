@@ -35,6 +35,7 @@ namespace MutateThem.Some_things
                 {
                     //loc = new Vector2(9999.9f, 9999.9f);
                     isDead = true;
+                    loc = new Vector2();
                 }
                 /*
                 for (int i = 0; i < count; i++)

@@ -12,7 +12,6 @@ namespace MutateThem.Some_things
     {
         public bool IsPlaying { get; set; }
         public Texture2D playerHands { get; set; }
-        public Texture2D playerHandsDog { get; set; }
         public float HandRotation { get; set; }
         Rectangle Hands;
         Rectangle Orging;
@@ -27,7 +26,6 @@ namespace MutateThem.Some_things
             colour = Color.SKYBLUE;
 
             playerHands = Raylib.LoadTexture("Files/Sprites/PlayerHands.png");
-            playerHandsDog = Raylib.LoadTexture("Files/Sprites/PlayerHandsDog.png");
             HandRotation = 0.14f;
             Hands = new Rectangle();
             Hands.x = 0;
@@ -59,9 +57,7 @@ namespace MutateThem.Some_things
 
             if (isDead) return;
             Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
-            HandRotation += 360.0f * Raylib.GetFrameTime();
-            Raylib.DrawTextureEx(playerHands, loc, HandRotation, 0.74f, Color.WHITE);
-            Raylib.DrawTextureEx(playerHandsDog, loc, HandRotation + 180, 0.94f, Color.WHITE);
+            Raylib.DrawTextureEx(playerHands, loc, HandRotation, 0.14f, Color.WHITE);
             //Raylib.DrawTexturePro(playerHands, Orging, Hands, -loc, 0.0f, Color.YELLOW);
             //Raylib.DrawText(playerHands.height.ToString(), 15, 15, 30, Color.WHITE);
         }

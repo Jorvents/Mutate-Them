@@ -40,7 +40,7 @@ namespace MutateThem
         void Work()
         {
             player.Work();
-            //player.HandRotation = Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY()) + 135;
+            player.HandRotation = Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY()) + 135;
             foreach (Enemy enemy in enemies)
             {
                 //enemyz.MyEnemy = player;

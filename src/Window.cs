@@ -28,7 +28,6 @@ namespace MutateThem
 
             }
             Raylib.UnloadTexture(player.playerHands);
-            Raylib.UnloadTexture(player.playerHandsDog);
 
             Raylib.CloseWindow();
         }
