@@ -14,10 +14,10 @@ namespace MutateThem
         public Vector2 loc { get; set; }
         public int radius { get; set; }
         public Color colour { get; set; }
-        public bool isDead { get; set; }
+        public bool IsActive { get; set; }
         public Something()
         {
-            isDead = false;
+            IsActive = true;
         }
         /*
         public void Draw()

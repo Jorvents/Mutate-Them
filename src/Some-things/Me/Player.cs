@@ -5,33 +5,37 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Raylib_cs;
+using MutateThem.Some_things.Me;
 
-namespace MutateThem.Some_things
+namespace MutateThem.Some_things.Me
 {
     public class Player : Something
     {
-        public bool IsPlaying { get; set; }
         public Texture2D playerHands { get; set; }
         public float HandRotation { get; set; }
-        Vector2 OrginOfHands { get; set; }
-        Rectangle Hands { get; set; }
-        Rectangle Desging { get; set; }
+        public HandPowers handpowers { get; set; }
+
+        Vector2 OrginOfHands;
+        Rectangle Hands;
+        Rectangle Desging;
         public Player()
         {
-            loc = new Vector2();
-
+            //Body
             loc = new(Raylib.GetScreenWidth() / 2.0f, Raylib.GetScreenHeight() / 2.0f);
 
-            IsPlaying = false;
+            IsActive = false;
             radius = 40;
             colour = Color.SKYBLUE;
 
+            //Circle
             playerHands = Raylib.LoadTexture("Files/Sprites/PlayerHands.png");
             HandRotation = 0.14f;
             Hands = new Rectangle(0.0f, 0.0f, 600.0f, 600.0f); //DONT CHANGE
             Desging = new Rectangle(loc.X, loc.Y, 100.0f, 100.0f);
             OrginOfHands = new Vector2(45, 90);
-            //Raylib.UnloadTexture(playerHands);
+
+            //Hand powers
+            handpowers = new HandPowers();
         }
         public void Work()
         {
@@ -41,19 +45,24 @@ namespace MutateThem.Some_things
             Vector2 input = new(x, y);
             if (input != Vector2.Zero)
             {
-                IsPlaying = true;
+                IsActive = true;
                 input = Vector2.Normalize(input);
             }
             loc += input * 300 * Raylib.GetFrameTime();
             Desging = new Rectangle(loc.X, loc.Y, 90.0f, 90.0f);
+
+            handpowers.stickTo = loc;
+            handpowers.Work();
         }
         public void Draw()
         {
 
-            if (isDead) return;
+            //if (!IsActive) return;
             Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
             //Raylib.DrawTextureEx(playerHands, loc, HandRotation, 0.14f, Color.WHITE);
             Raylib.DrawTexturePro(playerHands, Hands, Desging, OrginOfHands, HandRotation + 134, Color.YELLOW);
+
+            handpowers.Draw();
             //Raylib.DrawText(Desging.height.ToString(), 15, 15, 30, Color.WHITE);
             //Raylib.DrawText(playerHands.height.ToString(), 15, 15, 30, Color.WHITE);
         }

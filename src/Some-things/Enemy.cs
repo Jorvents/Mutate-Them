@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Raylib_cs;
+using MutateThem.Some_things.Me;
 
 namespace MutateThem.Some_things
 {
@@ -22,12 +23,13 @@ namespace MutateThem.Some_things
             speed = 80;
             radius = 30;
             colour = Raylib_cs.Color.RED;
+            //IsActive = true;
         }
         public void Work()
         {
-            if (MyEnemy.IsPlaying)
+            if (MyEnemy.IsActive)
             {
-                if (!isDead)
+                if (IsActive)
                 {
                     target = MyEnemy.loc;
                     farness = loc - target;
@@ -36,7 +38,7 @@ namespace MutateThem.Some_things
                     if (Raylib.CheckCollisionCircles(MyEnemy.loc, MyEnemy.radius, loc, radius))
                     {
                         //loc = new Vector2(9999.9f, 9999.9f);
-                        isDead = true;
+                        IsActive = false;
                         //loc = new Vector2();
                     }
                 }
@@ -44,7 +46,7 @@ namespace MutateThem.Some_things
         }
         public void Draw()
         {
-            if (isDead) return;
+            if (!IsActive) return;
             Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
         }
     }

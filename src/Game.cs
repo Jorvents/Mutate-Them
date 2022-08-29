@@ -1,5 +1,5 @@
 ﻿using MutateThem.Some_things;
-using MutateThem.Info;
+using MutateThem.Some_things.Me;
 using Raylib_cs;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace MutateThem
         Player player;
         //Enemy enemy;
         Enemy[] enemies;
-        public Game(Player player/*, Enemy enemy*/)
+        public Game(Player player)
         {
             this.player = player;
             //Console.WriteLine(Directory.GetCurrentDirectory());
@@ -33,14 +33,22 @@ namespace MutateThem
         {
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_K))
             {
-                player.IsPlaying = false;
+                player.IsActive = false;
                 ScatterThem(1);
             }
-
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_L))
+            {
+                player.IsActive = false;
+                ScatterThem(5000);
+            }
         }
         void Work()
         {
-            player.HandRotation = Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY()) + 135;
+            float AngLe = Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY());
+            player.HandRotation = AngLe + 134;
+            HandPowers thisPower = player.handpowers;
+            thisPower.rotateIn = toVector(AngLe - 180) * thisPower.disctance;
+            thisPower.grabbing = enemies;
             player.Work();
             foreach (Enemy enemy in enemies)
             {
@@ -51,12 +59,12 @@ namespace MutateThem
         void Draw()
         {
             Raylib.DrawText(Raylib.GetFPS().ToString(), 15, 15, 30, Color.WHITE);
-            player.Draw();
             //Raylib.DrawLine((int)player.loc.X, (int)player.loc.Y, Raylib.GetMouseX(), Raylib.GetMouseY(), Color.YELLOW);
             foreach (Enemy enemy in enemies)
             {
                 enemy.Draw();
             }
+            player.Draw();
 
             //Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY());
         }
@@ -84,6 +92,11 @@ namespace MutateThem
            //Math.Tau;
             //angleD = -angleD;
             return (float)angleD;
+        }
+        public Vector2 toVector(float angle)
+        {
+            double angleD = angle / (180 / Math.PI);
+            return new Vector2((float)Math.Cos(angleD),(float)Math.Sin(angleD));
         }
         public float Hypotenus()
         {
