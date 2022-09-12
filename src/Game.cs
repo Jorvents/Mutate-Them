@@ -55,14 +55,17 @@ namespace MutateThem
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_K))
             {
-                player.IsActive = false;
-                player.handpowers.IsActive = true;
+                Reset();
                 ScatterThem(1);
+            }
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_O))
+            {
+                Reset();
+                ScatterThem(50);
             }
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_L))
             {
-                player.IsActive = false;
-                player.handpowers.IsActive = true;
+                Reset();
                 ScatterThem(5000);
             }
         }
@@ -92,26 +95,29 @@ namespace MutateThem
             Raylib.DrawText(Raylib.GetFPS().ToString(), 15, 15, 30, Color.WHITE);
             Raylib.DrawText(lastPressed3.ToString(), 15, 45, 30, Color.WHITE);
             //Raylib.DrawLine((int)player.loc.X, (int)player.loc.Y, Raylib.GetMouseX(), Raylib.GetMouseY(), Color.YELLOW);
-            alli.Draw();
             foreach (Enemy enemy in enemies)
             {
                 enemy.Draw();
             }
+            alli.Draw();
             player.Draw();
             //Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY());
         }
         public void ScatterThem(int count)
         {
+            //count++;
             enemies = new Enemy[count];
 
             var rndm = new Random();
 
             for (int i = 0; i < count; i++)
             {
+                //if (i == 0) return;
                 //enemies[i].loc = new Vector();
                 enemies[i] = new Enemy();
                 enemies[i].MyEnemy = player;
                 enemies[i].loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
+                enemies[i].whichOne = i;
             }
         }
         public float Angle(Vector2 first, int secondX, int secondY)
@@ -129,6 +135,13 @@ namespace MutateThem
         {
             double angleD = angle / (180 / Math.PI);
             return new Vector2((float)Math.Cos(angleD),(float)Math.Sin(angleD));
+        }
+        public void Reset() //Temporary for testing
+        {
+            player.IsActive = false;
+            player.handpowers.IsActive = true;
+            alli = new Ally();
+
         }
         public bool Touches(Vector2 loc1, int radius1, Vector2 loc2, int radius2)
         {

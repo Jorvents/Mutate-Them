@@ -14,7 +14,7 @@ namespace MutateThem.Some_things.notPlayer
     {
         public Player MyEnemy { get; set; }
         public bool isDead { get; set; }
-
+        public int whichOne { get; set; }
 
         //public Vector2[] vector2s { get; set; }
         public Enemy()
@@ -46,6 +46,7 @@ namespace MutateThem.Some_things.notPlayer
         {
             if (!IsActive) return;
             Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
+            Raylib.DrawText(whichOne.ToString(), (int)loc.X - 10, (int)loc.Y - 10, 30, Color.WHITE);
         }
         public void Dead()
         {
