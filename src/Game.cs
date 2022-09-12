@@ -8,6 +8,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using MutateThem.Some_things.notPlayer;
 
 namespace MutateThem
 {
@@ -15,13 +16,18 @@ namespace MutateThem
     {
         Player player;
         //Enemy enemy;
-        Enemy[] enemies;
+        public Enemy[] enemies;
+        //public Ally[] allies;
+        public Ally alli;
+        int lastPressed3;
         public Game(Player player)
         {
             this.player = player;
             //Console.WriteLine(Directory.GetCurrentDirectory());
             //this.enemy = enemy;
+            alli = new Ally();
             ScatterThem(25);
+            lastPressed3 = 0;
         }
         public void justRun()
         {
@@ -31,41 +37,67 @@ namespace MutateThem
         }
         void Play()
         {
+            player.handpowers.leftclicked = Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT);
+            player.handpowers.rightclicked = Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_RIGHT);
+
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE))
+            {
+                lastPressed3 = 1;
+            }
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO))
+            {
+                lastPressed3 = 2;
+            }
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE))
+            {
+                lastPressed3 = 3;
+            }
+
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_K))
             {
                 player.IsActive = false;
+                player.handpowers.IsActive = true;
                 ScatterThem(1);
             }
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_L))
             {
                 player.IsActive = false;
+                player.handpowers.IsActive = true;
                 ScatterThem(5000);
             }
         }
         void Work()
         {
             float AngLe = Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY());
-            player.HandRotation = AngLe + 134;
+            player.HandRotation = AngLe + 135;
             HandPowers thisPower = player.handpowers;
             thisPower.rotateIn = toVector(AngLe - 180) * thisPower.disctance;
             thisPower.grabbing = enemies;
+            thisPower.choosen = lastPressed3;
+            alli.Mysabotagesebles = enemies;
             player.Work();
-            foreach (Enemy enemy in enemies)
+            for (int i = 0; i < enemies.Length; i++)
             {
-                //enemyz.MyEnemy = player;
-                enemy.Work();
+                enemies[i].Work();
+                if (enemies[i].isDead)
+                {
+                    //enemies[i] = null;
+                }
             }
+            alli.Work();
         }
         void Draw()
         {
+
             Raylib.DrawText(Raylib.GetFPS().ToString(), 15, 15, 30, Color.WHITE);
+            Raylib.DrawText(lastPressed3.ToString(), 15, 45, 30, Color.WHITE);
             //Raylib.DrawLine((int)player.loc.X, (int)player.loc.Y, Raylib.GetMouseX(), Raylib.GetMouseY(), Color.YELLOW);
+            alli.Draw();
             foreach (Enemy enemy in enemies)
             {
                 enemy.Draw();
             }
             player.Draw();
-
             //Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY());
         }
         public void ScatterThem(int count)
@@ -97,6 +129,10 @@ namespace MutateThem
         {
             double angleD = angle / (180 / Math.PI);
             return new Vector2((float)Math.Cos(angleD),(float)Math.Sin(angleD));
+        }
+        public bool Touches(Vector2 loc1, int radius1, Vector2 loc2, int radius2)
+        {
+            return Raylib.CheckCollisionCircles(loc1, radius1, loc2, radius2);
         }
         public float Hypotenus()
         {

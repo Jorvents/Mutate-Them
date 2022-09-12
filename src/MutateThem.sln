@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutateThem", "MutateThem.csproj", "{FA11877D-E148-4627-B8F0-00602566A672}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MutateThem", "MutateThem.csproj", "{FA11877D-E148-4627-B8F0-00602566A672}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstallerMSI", "..\InstallerMSI\InstallerMSI.vdproj", "{67906B43-FF45-4A87-8B4E-2DB79A22DFCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{FA11877D-E148-4627-B8F0-00602566A672}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA11877D-E148-4627-B8F0-00602566A672}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA11877D-E148-4627-B8F0-00602566A672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67906B43-FF45-4A87-8B4E-2DB79A22DFCE}.Debug|Any CPU.ActiveCfg = Debug
+		{67906B43-FF45-4A87-8B4E-2DB79A22DFCE}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

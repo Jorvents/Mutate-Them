@@ -22,6 +22,7 @@ namespace MutateThem
             Raylib.SetTargetFPS(162);
 
             Player player = new Player();
+
             Game game = new Game(player);
 
             while (!Raylib.WindowShouldClose())

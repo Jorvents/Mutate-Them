@@ -7,22 +7,23 @@ using System.Threading.Tasks;
 using Raylib_cs;
 using MutateThem.Some_things.Me;
 
-namespace MutateThem.Some_things
+namespace MutateThem.Some_things.notPlayer
 {
 
-    public class Enemy : Something
+    public class Enemy : Mutateble
     {
-        Vector2 target { get; set; }
-        Vector2 direction { get; set; }
-        Vector2 farness { get; set; }
         public Player MyEnemy { get; set; }
-        float speed { get; set; }
+        public bool isDead { get; set; }
+
+
         //public Vector2[] vector2s { get; set; }
         public Enemy()
         {
+            what = Mutatebles.Throw;
             speed = 80;
             radius = 30;
             colour = Raylib_cs.Color.RED;
+            isDead = false;
             //IsActive = true;
         }
         public void Work()
@@ -32,14 +33,11 @@ namespace MutateThem.Some_things
                 if (IsActive)
                 {
                     target = MyEnemy.loc;
-                    farness = loc - target;
-                    direction = Vector2.Normalize(farness);
-                    loc += direction * -speed * Raylib.GetFrameTime();
+                    Follow(target);
                     if (Raylib.CheckCollisionCircles(MyEnemy.loc, MyEnemy.radius, loc, radius))
                     {
-                        //loc = new Vector2(9999.9f, 9999.9f);
-                        IsActive = false;
-                        //loc = new Vector2();
+                        Dead();
+                        //Game.enemies;
                     }
                 }
             }
@@ -48,6 +46,12 @@ namespace MutateThem.Some_things
         {
             if (!IsActive) return;
             Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
+        }
+        public void Dead()
+        {
+            IsActive = false;
+            isDead = true;
+            loc = new Vector2(9999.9f, 9999.9f);
         }
     }
 }
