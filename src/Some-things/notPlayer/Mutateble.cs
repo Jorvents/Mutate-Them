@@ -17,6 +17,27 @@ namespace MutateThem.Some_things.notPlayer
         public float speed { get; set; }
         public Mutateble()
         {
+            /*
+            switch ((int)what)
+            {
+                case 0:
+                    Holder = Holding.Throw;
+                    //BE LIKE THIS
+                    break;
+                case 1:
+                    Holder = Holding.Ally;
+                    //BE YELLOW
+                    break;
+                case 2:
+                    Holder = Holding.Bomb;
+                    //BE GREY
+                    break;
+                case 3:
+                    Holder = Holding.Sheild;
+                    //BE AQUA
+                    break;
+            }
+            */
             speed = 100;
         }
         public void Follow(Vector2 that)

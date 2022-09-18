@@ -52,7 +52,8 @@ namespace MutateThem.Some_things.notPlayer
         {
             IsActive = false;
             isDead = true;
-            loc = new Vector2(9999.9f, 9999.9f);
+            //loc = new Vector2(9999.9f, 9999.9f);
+
         }
     }
 }

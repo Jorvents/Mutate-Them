@@ -8,22 +8,21 @@ using System.Threading.Tasks;
 
 namespace MutateThem.Some_things.notPlayer
 {
-    public class Ally : Mutateble
+    public class Ally : Mutateble // : Imuteable?
     {
-        public Enemy[] Mysabotagesebles { get; set; }
         Enemy Theclosest { get; set; }
-        public Ally()
+        public Ally(Vector2 spawn)
         {
-            loc = new Vector2(100, 100);
+            loc = spawn;
             what = Mutatebles.Ally;
-            speed = 5000;
+            speed = 85;
             radius = 25;
             colour = Raylib_cs.Color.YELLOW;
         }
         public void Work()
         {
 
-            Follow(WhoToFollow(Mysabotagesebles));
+            Follow(WhoToFollow(Game.enemies));
             if (Theclosest == null) return;
             if (Raylib.CheckCollisionCircles(Theclosest.loc, Theclosest.radius, loc, radius))
             {
@@ -36,7 +35,7 @@ namespace MutateThem.Some_things.notPlayer
             Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
         }
 
-        public Vector2 WhoToFollow(Enemy[] choices)
+        public Vector2 WhoToFollow(List<Enemy> choices)
         {
             Vector2 closest = new Vector2(9999,9999);
             foreach (Enemy choice in choices)
@@ -48,28 +47,15 @@ namespace MutateThem.Some_things.notPlayer
                     Theclosest = choice;
                 }
             }
-            /*
-            for (int i = 0; i < choices.Length; i++)
-            {
-                Vector2 curr = choices[i].loc;
-                if (distanceTo(curr) < distanceTo(closest))
-                {
-                    closest = curr;
-                    if (choices[i] != null)
-                    {
-                        Theclosest = choices[i];
-                    }
-                }
-            }
-            */
             if (distanceTo(closest) > 7000)
             {
+                IsActive = false;
                 return loc;
             } else
             {
                 return closest;
             }
-            //return new Vector2(0, 0);
+
         }
         public void Revive()
         {

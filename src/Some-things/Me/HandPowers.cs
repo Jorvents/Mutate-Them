@@ -14,93 +14,132 @@ namespace MutateThem.Some_things.Me
         public Vector2 stickTo { get; set; }
         public int disctance { get; set; }
         public Vector2 rotateIn { get; set; }
-        public Enemy[] grabbing { get; set; }
+        //public Enemy[] grabbingEnemy { get; set; }
+        //public Ally[] grabbingAlly { get; set; }
+        //public Mutateble holding { get; set; }
         public bool leftclicked { get; set; }
         public bool rightclicked { get; set; }
-        public int choosen { get; set; }
+        //public int choosen { get; set; }
         public Holding Holder { get; set; }
-        Enemy graberia { get; set; }
+        Enemy graberiaEnemy { get; set; }
+        Ally graberiaAlly { get; set; }
+
         public HandPowers()
         {
             radius = 18;
             colour = Raylib_cs.Color.WHITE;
             disctance = 88;
+            //graberiaAlly = new Ally(new Vector2(6000,6000));
             //IsActive = true;
         }
         public void Work()
         {
             loc = rotateIn + stickTo;
-            foreach (Enemy grabers in grabbing)
+            for (int i = 0; i < Game.allies.Count; i++)
             {
-                graberia = grabers;
-                if (!IsActive)
-                {
-                    //DrawGrab(grabers);
-                    if (rightclicked)
-                    {
-                        IsActive = true;
-                    }
-                    /*
-                    int WhatHolding = (int)grabers.what;
-                    switch (WhatHolding)
-                    {
-                        case 0:
-                            Holder = Holding.Throw;
-                            //BE LIKE THIS
-                            break;
-                        case 1:
-                            Holder = Holding.Ally;
-                            //BE YELLOW
-                            break;
-                        case 2:
-                            Holder = Holding.Bomb;
-                            //BE GREY
-                            break;
-                        case 3:
-                            Holder = Holding.Sheild;
-                            //BE AQUA
-                            break;
-                    }
-                    if ((int)Holder == choosen)
-                    {
-                        //has the current selected
-                    } else
-                    {
-
-                    }
-                    */
-                }
-                if (Raylib.CheckCollisionCircles(grabers.loc, 3, loc, radius) && IsActive && leftclicked)
+                if (Raylib.CheckCollisionCircles(Game.allies[i].loc, 3, loc, radius) && IsActive && leftclicked)
                 {
                     IsActive = false;
-                    grabers.Dead();
-                    //grabers.isDead = false;
-                    /*
-                    Random rand = new Random();
-                    grabers.radius = rand.Next(20,40);
-                    switch (rand.Next(1, 4))
-                    {
-                        case 1:
-                            grabers.colour = Color.VIOLET;
-                            break;
-                        case 2:
-                            grabers.colour = Color.YELLOW;
-                            break;
-                        case 3:
-                            grabers.colour = Color.GREEN;
-                            break;
-                    }
-                    */
+                    Game.allies[i].IsActive = false;
+                    Holder = Holding.Ally;
+                    graberiaAlly = Game.allies[i];
                 }
             }
+            if (!IsActive && Holder == Holding.Ally)
+            {
+                if (rightclicked)
+                {
+                    IsActive = true;
+                    Game.allies.Add(new Ally(loc));
+                }
+            }
+            for (int i = 0; i < Game.enemies.Count; i++)
+            {
+                if (Raylib.CheckCollisionCircles(Game.enemies[i].loc, 3, loc, radius) && IsActive && leftclicked)
+                {
+                    IsActive = false;
+                    Holder = Holding.Throw;
+                    graberiaEnemy = Game.enemies[i];
+                    Game.enemies[i].Dead();
+                }
+            }
+            if (!IsActive && Holder == Holding.Throw)
+            {
+                if (rightclicked)
+                {
+                    IsActive = true;
+                }
+            }
+            /*
+            switch ((int)Holder)
+            {
+                case 0:
+                    Holder = Holding.Throw;
+                    //BE LIKE THIS
+                    break;
+                case 1:
+                    Holder = Holding.Ally;
+                    //BE YELLOW
+                    break;
+                case 2:
+                    Holder = Holding.Bomb;
+                    //BE GREY
+                    break;
+                case 3:
+                    Holder = Holding.Sheild;
+                    //BE AQUA
+                    break;
+            }
+            */
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            {
+                Holder = (Holding)Game.lastPressed3;
+            }
+            /*
+            if ((int)Holder == Game.lastPressed3)
+            {
+                //has the current selected
+            }
+            else
+            {
+
+            }
+            */
         }
         public void Draw()
         {
+            Raylib.DrawText(Holder.ToString(), 15, 75, 30, Color.WHITE);
+            Raylib.DrawText(Game.allies.Count.ToString(), 15, 105, 30, Color.WHITE);
+
             Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
+
+            //DrawHolding(holding);
             if (!IsActive) 
             {
-                Raylib.DrawCircle((int)loc.X, (int)loc.Y, graberia.radius, graberia.colour);
+                switch((int)Holder)
+                {
+                    case 0:
+                    Raylib.DrawCircle((int)loc.X, (int)loc.Y, graberiaEnemy.radius, graberiaEnemy.colour);
+                    break;
+                    case 1:
+                    if (graberiaAlly != null)
+                    {
+                        Raylib.DrawCircle((int)loc.X, (int)loc.Y, graberiaAlly.radius, graberiaAlly.colour);
+                    }
+                    Raylib.DrawCircle((int)loc.X, (int)loc.Y, 25, Raylib_cs.Color.YELLOW);
+                    break;
+                }
             }
+        }
+        public void DrawHolding(Mutateble holding)
+        {
+            /*
+            switch ((int)holding.what)
+            {
+                case
+            }
+            */
+            Raylib.DrawCircle((int)holding.loc.X, (int)holding.loc.Y, holding.radius, holding.colour);
         }
         public enum Holding
         {

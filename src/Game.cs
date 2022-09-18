@@ -12,24 +12,31 @@ using MutateThem.Some_things.notPlayer;
 
 namespace MutateThem
 {
-    internal class Game
+    class Game
     {
         Player player;
         //Enemy enemy;
-        public Enemy[] enemies;
+        static public List<Enemy> enemies { get; set; }
+        //static public Enemy[] enemiess { get; set; }
+        static public List<Ally> allies { get; set; }
+        //static public Ally[] alliess { get; set; }
+
         //public Ally[] allies;
-        public Ally alli;
-        int lastPressed3;
+        //public Ally alli;
+        public static int lastPressed3;
         public Game(Player player)
         {
             this.player = player;
             //Console.WriteLine(Directory.GetCurrentDirectory());
             //this.enemy = enemy;
-            alli = new Ally();
-            ScatterThem(25);
+            //alli = new Ally();
+            allies = new List<Ally>();
+            //allies[0] = new Ally();
+            //allies.Add(new Ally(new Vector2(100, 100)));
+            ScatterThem(50);
             lastPressed3 = 0;
         }
-        public void justRun()
+        public void justRun()// VERY IMPORTANT
         {
             Play();
             Work();
@@ -75,46 +82,55 @@ namespace MutateThem
             player.HandRotation = AngLe + 135;
             HandPowers thisPower = player.handpowers;
             thisPower.rotateIn = toVector(AngLe - 180) * thisPower.disctance;
-            thisPower.grabbing = enemies;
-            thisPower.choosen = lastPressed3;
-            alli.Mysabotagesebles = enemies;
+
             player.Work();
-            for (int i = 0; i < enemies.Length; i++)
+            for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].Work();
                 if (enemies[i].isDead)
                 {
                     //enemies[i] = null;
+                    enemies.RemoveAt(i);
                 }
             }
-            alli.Work();
+            for (int i = 0; i < allies.Count; i++)
+            {
+                allies[i].Work();
+                if (allies[i].IsActive == false)
+                {
+                    allies.RemoveAt(i);
+                }
+            }
         }
         void Draw()
         {
 
             Raylib.DrawText(Raylib.GetFPS().ToString(), 15, 15, 30, Color.WHITE);
             Raylib.DrawText(lastPressed3.ToString(), 15, 45, 30, Color.WHITE);
+
             //Raylib.DrawLine((int)player.loc.X, (int)player.loc.Y, Raylib.GetMouseX(), Raylib.GetMouseY(), Color.YELLOW);
             foreach (Enemy enemy in enemies)
             {
                 enemy.Draw();
             }
-            alli.Draw();
+            for (int i = 0; i < allies.Count; i++)
+            {
+                allies[i].Draw();
+            }
             player.Draw();
-            //Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY());
         }
         public void ScatterThem(int count)
         {
             //count++;
-            enemies = new Enemy[count];
-
+            //enemies = new Enemy[count];
+            enemies = new List<Enemy>();
             var rndm = new Random();
 
             for (int i = 0; i < count; i++)
             {
                 //if (i == 0) return;
                 //enemies[i].loc = new Vector();
-                enemies[i] = new Enemy();
+                enemies.Add(new Enemy());
                 enemies[i].MyEnemy = player;
                 enemies[i].loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
                 enemies[i].whichOne = i;
@@ -140,8 +156,37 @@ namespace MutateThem
         {
             player.IsActive = false;
             player.handpowers.IsActive = true;
-            alli = new Ally();
+            /*
+            if (allies.Count == 0)
+            {
+                allies.Add(new Ally(new Vector2(100, 100)));
+            }
+            for (int i = 0; i < allies.Count; i++)
+            {
+                allies[i] = new Ally(new Vector2(100, 100));
+                //ALL ON TOP
+            }
+            */
+        }
+        //NOT USED METHODS
+        public static bool Timer(int time) // NOT DONE
+        {
+            int currentTime = Environment.TickCount;
+            bool yesno = false;
+            for (int i = 0; time > currentTime; i++)
+            {
+                return yesno;
 
+            }
+            return yesno;
+        }
+        public static void AddAlly(/*Vector2 location*/)
+        {
+            /*
+            int amountAllies = allies.Length;
+            allies = new Ally[amountAllies++];
+            allies[amountAllies] = new Ally();
+            */
         }
         public bool Touches(Vector2 loc1, int radius1, Vector2 loc2, int radius2)
         {
