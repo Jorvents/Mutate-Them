@@ -28,17 +28,14 @@ namespace MutateThem.Some_things.notPlayer
         }
         public void Work()
         {
-            if (MyEnemy.IsActive)
+            if (MyEnemy.IsActive && IsActive)
             {
-                if (IsActive)
+                target = MyEnemy.loc;
+                Follow(target);
+                if (Raylib.CheckCollisionCircles(MyEnemy.loc, MyEnemy.radius, loc, radius))
                 {
-                    target = MyEnemy.loc;
-                    Follow(target);
-                    if (Raylib.CheckCollisionCircles(MyEnemy.loc, MyEnemy.radius, loc, radius))
-                    {
-                        Dead();
-                        //Game.enemies;
-                    }
+                    Dead();
+                    //Game.enemies;
                 }
             }
         }

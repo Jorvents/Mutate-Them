@@ -9,7 +9,7 @@ using MutateThem.Some_things.notPlayer;
 
 namespace MutateThem.Some_things.Me
 {
-    public class HandPowers : Something
+    public class HandPowers : Something //Mutating
     {
         public Vector2 stickTo { get; set; }
         public int disctance { get; set; }
@@ -35,6 +35,7 @@ namespace MutateThem.Some_things.Me
         public void Work()
         {
             loc = rotateIn + stickTo;
+            //#######################################################
             for (int i = 0; i < Game.allies.Count; i++)
             {
                 if (Raylib.CheckCollisionCircles(Game.allies[i].loc, 3, loc, radius) && IsActive && leftclicked)
@@ -53,6 +54,7 @@ namespace MutateThem.Some_things.Me
                     Game.allies.Add(new Ally(loc));
                 }
             }
+            //###########################################################
             for (int i = 0; i < Game.enemies.Count; i++)
             {
                 if (Raylib.CheckCollisionCircles(Game.enemies[i].loc, 3, loc, radius) && IsActive && leftclicked)

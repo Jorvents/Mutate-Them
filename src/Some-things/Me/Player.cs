@@ -14,6 +14,7 @@ namespace MutateThem.Some_things.Me
         public Texture2D playerHands { get; set; }
         public float HandRotation { get; set; }
         public HandPowers handpowers { get; set; }
+        int health { get; set; }
 
         Vector2 OrginOfHands;
         Rectangle Hands;

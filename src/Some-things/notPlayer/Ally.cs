@@ -21,7 +21,6 @@ namespace MutateThem.Some_things.notPlayer
         }
         public void Work()
         {
-
             Follow(WhoToFollow(Game.enemies));
             if (Theclosest == null) return;
             if (Raylib.CheckCollisionCircles(Theclosest.loc, Theclosest.radius, loc, radius))
@@ -38,6 +37,15 @@ namespace MutateThem.Some_things.notPlayer
         public Vector2 WhoToFollow(List<Enemy> choices)
         {
             Vector2 closest = new Vector2(9999,9999);
+            if (choices.Count != 0)
+            {
+                Theclosest = choices.Aggregate((e1, e2) => distanceTo(e1.loc) < distanceTo(e2.loc) ? e1 : e2);
+            }
+            if (Theclosest != null)
+            {
+                closest = Theclosest.loc;
+            }
+            /*
             foreach (Enemy choice in choices)
             {
                 Vector2 curr = choice.loc;
@@ -47,6 +55,7 @@ namespace MutateThem.Some_things.notPlayer
                     Theclosest = choice;
                 }
             }
+            */
             if (distanceTo(closest) > 7000)
             {
                 IsActive = false;
