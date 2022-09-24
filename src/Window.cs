@@ -1,42 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MutateThem.Some_things.Me;
+﻿using System.Numerics;
 using Raylib_cs;
 
-namespace MutateThem
+namespace MutateThem;
+
+class Window
 {
-    class Window
+    public static Vector2 WindowSize = new(1280, 720);
+    
+    public void Run()
     {
-        public void Run()
+        Raylib.InitWindow((int) WindowSize.X, (int) WindowSize.Y, "Mutate them!");
+
+        var icon = Raylib.LoadImage("Files/Sprites/Icon.png");
+
+        Raylib.SetWindowIcon(icon);
+        Raylib.SetTargetFPS(162);
+
+        Game game = new();
+
+        var start = Game.GetTimeMs();
+        
+        while (!Raylib.WindowShouldClose())
         {
-
-            Raylib.InitWindow(1280, 720, "Mutate them!");
-
-            Image icon = Raylib.LoadImage("Files/Sprites/Icon.png");
-
-            Raylib.SetWindowIcon(icon);
-
-            Raylib.SetTargetFPS(162);
-
-            Player player = new Player();
-
-            Game game = new Game(player);
-
-            while (!Raylib.WindowShouldClose())
-            {
-                Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.BLACK);
-                game.justRun();
-                Raylib.EndDrawing();
-
-            }
-            Raylib.UnloadImage(icon);
-            Raylib.UnloadTexture(player.playerHands);
-
-            Raylib.CloseWindow();
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Color.BLACK);
+            game.JustRun();
+            Raylib.DrawText($"{(Game.GetTimeMs() - start)/1000f}s", 500, 12, 32, Color.BLUE);
+            Raylib.EndDrawing();
         }
+
+        Raylib.UnloadImage(icon);
+        Raylib.UnloadTexture(Game.player.playerHands);
+        Raylib.CloseWindow();
     }
 }

@@ -1,14 +1,10 @@
-﻿using System;
-using Raylib_cs;
+﻿namespace MutateThem;
 
-namespace MutateThem
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Window code = new Window();
-            code.Run();
-        }
+        Window code = new();
+        code.Run();
     }
 }

@@ -1,17 +1,17 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {
+    "net6.0": {
       "Raylib-cs/4.0.0.1": {
         "type": "package",
         "dependencies": {
           "System.Numerics.Vectors": "4.5.0"
         },
         "compile": {
-          "lib/net5.0/Raylib-cs.dll": {}
+          "lib/net6.0/Raylib-cs.dll": {}
         },
         "runtime": {
-          "lib/net5.0/Raylib-cs.dll": {}
+          "lib/net6.0/Raylib-cs.dll": {}
         },
         "runtimeTargets": {
           "runtimes/linux-x64/native/libraylib.so": {
@@ -114,7 +114,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net5.0": [
+    "net6.0": [
       "Raylib-cs >= 4.0.0.1"
     ]
   },
@@ -142,7 +142,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0"
+        "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -150,8 +150,8 @@
         "https://nuget.emzi0767.com/api/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "projectReferences": {}
         }
       },
@@ -162,8 +162,8 @@
       }
     },
     "frameworks": {
-      "net5.0": {
-        "targetAlias": "net5.0",
+      "net6.0": {
+        "targetAlias": "net6.0",
         "dependencies": {
           "Raylib-cs": {
             "target": "Package",

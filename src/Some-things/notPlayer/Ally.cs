@@ -1,74 +1,63 @@
 ﻿using Raylib_cs;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MutateThem.Some_things.notPlayer
+namespace MutateThem.Some_things.notPlayer;
+
+public class Ally : Mutable // : Imuteable?
 {
-    public class Ally : Mutateble // : Imuteable?
+    public static readonly Vector2 Furthest = new(9999);
+
+    Enemy Theclosest { get; set; }
+
+    public Ally(Vector2 spawn) : base(spawn, 25, Color.YELLOW, 85) => what = Mutables.Ally;
+
+    public override void Work()
     {
-        Enemy Theclosest { get; set; }
-        public Ally(Vector2 spawn)
+        Follow(WhoToFollow(Game.enemies));
+        if (Theclosest == null) return;
+
+        if (Raylib.CheckCollisionCircles(Theclosest.loc, Theclosest.radius, loc, radius))
         {
-            loc = spawn;
-            what = Mutatebles.Ally;
-            speed = 85;
-            radius = 25;
-            colour = Raylib_cs.Color.YELLOW;
+            Theclosest.Die();
         }
-        public void Work()
+    }
+
+    public void Draw()
+    {
+        Raylib.DrawCircle((int) loc.X, (int) loc.Y, radius, colour);
+    }
+
+    public Vector2 WhoToFollow(List<Enemy> choices)
+    {
+        var closest = Furthest;
+
+        if (choices.Any())
         {
-            Follow(WhoToFollow(Game.enemies));
-            if (Theclosest == null) return;
-            if (Raylib.CheckCollisionCircles(Theclosest.loc, Theclosest.radius, loc, radius))
-            {
-                Theclosest.Dead();
-                //Game.enemies;
-            }
-        }
-        public void Draw()
-        {
-            Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
+            Theclosest = choices.Aggregate((e1, e2) => DistanceTo(e1.loc) < DistanceTo(e2.loc) ? e1 : e2);
         }
 
-        public Vector2 WhoToFollow(List<Enemy> choices)
-        {
-            Vector2 closest = new Vector2(9999,9999);
-            if (choices.Count != 0)
-            {
-                Theclosest = choices.Aggregate((e1, e2) => distanceTo(e1.loc) < distanceTo(e2.loc) ? e1 : e2);
-            }
-            if (Theclosest != null)
-            {
-                closest = Theclosest.loc;
-            }
-            /*
-            foreach (Enemy choice in choices)
-            {
-                Vector2 curr = choice.loc;
-                if (distanceTo(curr) < distanceTo(closest))
-                {
-                    closest = curr;
-                    Theclosest = choice;
-                }
-            }
-            */
-            if (distanceTo(closest) > 7000)
-            {
-                IsActive = false;
-                return loc;
-            } else
-            {
-                return closest;
-            }
+        if (Theclosest != null) closest = Theclosest.loc;
 
-        }
-        public void Revive()
+        /*
+        foreach (Enemy choice in choices)
         {
-
+            Vector2 curr = choice.loc;
+            if (distanceTo(curr) < distanceTo(closest))
+            {
+                closest = curr;
+                Theclosest = choice;
+            }
         }
+        */
+        if (DistanceTo(closest) <= 7000) return closest;
+
+        isActive = false;
+        return loc;
+    }
+
+    public void Revive()
+    {
     }
 }
