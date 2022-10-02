@@ -20,7 +20,11 @@ public abstract class Something
         this.isActive = isActive;
     }
 
-    public void Die() => isActive = false;
+    public void Die()
+    {
+        isActive = false;
+        //loc = new Vector2(9999, 9999);
+    }
     
     /*
     public void Draw()

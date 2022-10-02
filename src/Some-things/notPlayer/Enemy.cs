@@ -8,30 +8,34 @@ public class Enemy : Mutable
 {
     public Player myEnemy;
 
-    private string _debugString;
+    //private string _debugString;
+
+    public bool isTargeted = false;
+    public int whichOne { get; set; }
 
     //public Vector2[] vector2s { get; set; }
-    public Enemy(Player player, Vector2 loc, int whichOne, bool isAlive = true) : base(loc, 30, Color.RED, 80, isAlive)
+    public Enemy(Player player, Vector2 loc, /*int whichOne,*/ bool isAlive = true) : base(loc, 30, Color.RED, 80, /* _debugString.parseInt(),*/ isAlive)
     {
         what = Mutables.Throw;
         myEnemy = player;
-        _debugString = $"{whichOne}";
+        //_debugString = $"{whichOne}";
     }
 
     public override void Work()
     {
-        if (!myEnemy.isActive || !isActive) return;
+        if (!myEnemy.isActive || !isActive || inControl) return;
 
         target = myEnemy.loc;
         Follow(target);
         if (Raylib.CheckCollisionCircles(myEnemy.loc, myEnemy.radius, loc, radius)) Die();
     }
 
-    public void Draw()
+    public override void Draw()
     {
         if (!isActive) return;
 
         Raylib.DrawCircle((int) loc.X, (int) loc.Y, radius, colour);
-        Raylib.DrawText(_debugString, (int) loc.X - 10, (int) loc.Y - 10, 30, Color.WHITE);
+        //Raylib.DrawText(_debugString, (int) loc.X - 10, (int) loc.Y - 10, 30, Color.WHITE);
+        Raylib.DrawText(whichOne.ToString(), (int)loc.X - 10, (int)loc.Y - 10, 30, Color.WHITE);
     }
 }

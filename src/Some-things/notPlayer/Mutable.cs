@@ -21,10 +21,15 @@ public abstract class Mutable : Something
     public Vector2 direction;
     public Vector2 farness;
     public float speed;
+    public bool inControl = false; //for handdpowers code
+    //private string _debugString;
+    //public int _debugIndex;
 
-    public Mutable(Vector2 loc, int radius, Color colour, float speed = 100, bool isActive = true) : base(loc, radius, colour, isActive)
+    public Mutable(Vector2 loc, int radius, Color colour, float speed,/* int whichOne, */bool isActive = true) : base(loc, radius, colour, isActive)
     {
         this.speed = speed;
+        //_debugIndex = whichOne;
+        //_debugString = $"{whichOne}";
     }
 
     public void Follow(Vector2 that)
@@ -48,4 +53,5 @@ public abstract class Mutable : Something
     }
 
     public abstract void Work();
+    public abstract void Draw();
 }

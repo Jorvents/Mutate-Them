@@ -23,7 +23,7 @@ class Game
 
     public static Player player = new();
 
-    // public static List<Mutable> entites = new(); 
+    public static List<Mutable> mutables = new(); 
 
     //Enemy enemy;
     public static List<Enemy> enemies;
@@ -42,7 +42,7 @@ class Game
         { Press1, KEY_ONE }, { Press2, KEY_TWO }, { Press3, KEY_THREE }, { Scatter1, KEY_K }, { Scatter50, KEY_O },
         { Scatter5k, KEY_L }
     };
-
+    public DebugController statsController = new();
     public Game()
     {
         //Console.WriteLine(Directory.GetCurrentDirectory());
@@ -113,31 +113,58 @@ class Game
         thisPower.rotateIn = toVector(angle - 180) * thisPower.disctance;
 
         player.Work();
-
-        enemies.RemoveAll(e =>
+        mutables.RemoveAll(m =>
         {
-            e.Work();
+            m.Work();
+            return m.IsDead;
+        });
+        enemies.RemoveAll(e => //TEMPORARY
+        {
+            //e.Work();
             return e.IsDead;
         });
-
+        /*
         allies.RemoveAll(a =>
         {
             a.Work();
             return a.IsDead;
         });
+        //*/
     }
 
     void Draw()
     {
         Raylib.DrawText(Raylib.GetFPS().ToString(), 15, 15, 30, Color.WHITE);
+        //statsController.stats.
+        //statsController.Draw();
         Raylib.DrawText(lastPressed3.ToString(), 15, 45, 30, Color.WHITE);
+        Raylib.DrawText(mutables.Count.ToString(), 15, 135, 30, Color.WHITE);
 
         //Raylib.DrawLine((int)player.loc.X, (int)player.loc.Y, Raylib.GetMouseX(), Raylib.GetMouseY(), Color.YELLOW);
-        enemies.ForEach(e => e.Draw());
-        allies.ForEach(a => a.Draw());
+        mutables.ForEach(m => m.Draw());
+        //enemies.ForEach(e => e.Draw());
+        //allies.ForEach(a => a.Draw());
         player.Draw();
     }
-
+    public void Reset() //Temporary for testing
+    {
+        lastPressed3 = 0;
+        mutables.Clear();
+        player.isActive = false;
+        player.handpowers.isActive = true;
+        mutables.Add(new Ally(new(100)));
+        /*
+        if (allies.Count == 0)
+        {
+            allies.Add(new Ally(new Vector2(100, 100)));
+        }
+        for (int i = 0; i < allies.Count; i++)
+        {
+            allies[i] = new Ally(new Vector2(100, 100));
+            //ALL ON TOP
+        }
+        */
+    }
     public static void ScatterThem(int count)
     {
         //count++;
@@ -150,7 +177,10 @@ class Game
             //if (i == 0) return;
             //enemies[i].loc = new Vector();
             Vector2 loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
-            enemies.Add(new Enemy(player, loc, i));
+            Enemy adding = new Enemy(player, loc/*,i*/);
+            adding.whichOne = i;
+            enemies.Add(adding);
+            mutables.Add(adding);
         }
     }
 
@@ -172,22 +202,7 @@ class Game
         return new Vector2((float) Math.Cos(angleD), (float) Math.Sin(angleD));
     }
 
-    public void Reset() //Temporary for testing
-    {
-        player.isActive = false;
-        player.handpowers.isActive = true;
-        /*
-        if (allies.Count == 0)
-        {
-            allies.Add(new Ally(new Vector2(100, 100)));
-        }
-        for (int i = 0; i < allies.Count; i++)
-        {
-            allies[i] = new Ally(new Vector2(100, 100));
-            //ALL ON TOP
-        }
-        */
-    }
+    
 
     //NOT USED METHODS
     public static long GetTimeMs() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
