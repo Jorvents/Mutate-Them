@@ -12,10 +12,12 @@ public class HandPowers : Something //Mutating
     {
         Throw,
         Ally,
-        Bomb,
-        Shield,
+        //Bomb,
+        //Shield,
+        //Teleport,
+        //Heal,
     }
-
+    
     public Vector2 stickTo;
     public int disctance;
 
@@ -177,13 +179,13 @@ public class HandPowers : Something //Mutating
         }
         */
     }
-
+    //this not a war crime, its a work of art
     public void Draw()
     {
         Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
 
         Raylib.DrawText(Holder.ToString(), 15, 75, 30, WHITE);
-        Raylib.DrawText(Game.allies.Count.ToString(), 15, 105, 30, WHITE);
+        //Raylib.DrawText(Game.allies.Count.ToString(), 15, 105, 30, WHITE);
         //Raylib.DrawText(idHolding.ToString(), 15, 165, 30, WHITE);
 
         //DrawHolding(holding);

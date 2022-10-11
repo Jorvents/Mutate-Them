@@ -11,6 +11,7 @@ public class Ally : Mutable // : Imuteable?
     public static readonly Vector2 Furthest = new(9999);
 
     Enemy Theclosest { get; set; }
+
     //Make the colour and size static
     //NO
     //TOO LITLE INF0
@@ -34,7 +35,7 @@ public class Ally : Mutable // : Imuteable?
 
     public override void Draw()
     {
-        if (!isActive) return;
+        //if (!isActive) return;
         Raylib.DrawCircle((int) loc.X, (int) loc.Y, radius, colour);
     }
 

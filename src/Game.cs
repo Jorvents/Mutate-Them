@@ -6,6 +6,7 @@ using System.Numerics;
 using MutateThem.Some_things.notPlayer;
 using static MutateThem.Game.Keybindings;
 using static Raylib_cs.KeyboardKey;
+using MutateThem.GUI;
 
 namespace MutateThem;
 
@@ -13,6 +14,7 @@ class Game
 {
     public enum Keybindings
     {
+        Press0,
         Press1,
         Press2,
         Press3,
@@ -22,24 +24,31 @@ class Game
     }
 
     public static Player player = new();
+    
+    public static List<Mutable> mutables = new();
 
-    public static List<Mutable> mutables = new(); 
-
+    //public static List<Mutable> statues = new();
     //Enemy enemy;
     public static List<Enemy> enemies;
 
     //static public Enemy[] enemiess { get; set; }
-    public static List<Ally> allies;
+    //public static List<Ally> allies;
     //static public Ally[] alliess { get; set; }
 
     //public Ally[] allies;
     //public Ally alli;
     public static int lastPressed3;
 
+    public static Selected selected = new();
+
+    static bool quitting = false;
+
+    long start = GetTimeMs();
+
     // dictionary is a hashmap
     public static Dictionary<Keybindings, KeyboardKey> keybindings = new()
     {
-        { Press1, KEY_ONE }, { Press2, KEY_TWO }, { Press3, KEY_THREE }, { Scatter1, KEY_K }, { Scatter50, KEY_O },
+        { Press0, KEY_ZERO }, { Press1, KEY_ONE }, { Press2, KEY_TWO }, { Press3, KEY_THREE }, { Scatter1, KEY_K }, { Scatter50, KEY_O },
         { Scatter5k, KEY_L }
     };
     public DebugController statsController = new();
@@ -48,7 +57,7 @@ class Game
         //Console.WriteLine(Directory.GetCurrentDirectory());
         //this.enemy = enemy;
         //alli = new Ally();
-        allies = new List<Ally>();
+        //allies = new List<Ally>();
         //allies[0] = new Ally();
         //allies.Add(new Ally(new Vector2(100, 100)));
         Reset();
@@ -81,6 +90,9 @@ class Game
     {
         switch (keybinding)
         {
+            case Press0:
+                lastPressed3 = 0;
+                break;
             case Press1:
                 lastPressed3 = 1;
                 break;
@@ -112,7 +124,7 @@ class Game
         var thisPower = player.handpowers;
         thisPower.rotateIn = toVector(angle - 180) * thisPower.disctance;
 
-        player.Work();
+        //player.Work();
         mutables.RemoveAll(m =>
         {
             m.Work();
@@ -123,6 +135,7 @@ class Game
             //e.Work();
             return e.IsDead;
         });
+        player.Work();
         /*
         allies.RemoveAll(a =>
         {
@@ -134,25 +147,31 @@ class Game
 
     void Draw()
     {
+        if (quitting) return;
         Raylib.DrawText(Raylib.GetFPS().ToString(), 15, 15, 30, Color.WHITE);
         //statsController.stats.
         //statsController.Draw();
-        Raylib.DrawText(lastPressed3.ToString(), 15, 45, 30, Color.WHITE);
+        //Raylib.DrawText(lastPressed3.ToString(), 15, 45, 30, Color.WHITE);
         Raylib.DrawText(mutables.Count.ToString(), 15, 135, 30, Color.WHITE);
-
+        //Raylib.DrawText(statues.Count.ToString(), 15, 345, 30, Color.WHITE);
+        Raylib.DrawText($"{(GetTimeMs() - start) / 1000f}s", 500, 12, 32, Color.BLUE);
         //Raylib.DrawLine((int)player.loc.X, (int)player.loc.Y, Raylib.GetMouseX(), Raylib.GetMouseY(), Color.YELLOW);
         mutables.ForEach(m => m.Draw());
+        //statues.ForEach(s => s.Draw());
         //enemies.ForEach(e => e.Draw());
         //allies.ForEach(a => a.Draw());
         player.Draw();
+        selected.Draw();
+        //statues.ForEach(s => s.Draw());
     }
     public void Reset() //Temporary for testing
     {
         lastPressed3 = 0;
         mutables.Clear();
+        player.health = 20;
         player.isActive = false;
         player.handpowers.isActive = true;
-        mutables.Add(new Ally(new(100)));
+        //mutables.Add(new Ally(new(100)));
         /*
         if (allies.Count == 0)
         {
@@ -200,6 +219,12 @@ class Game
     {
         double angleD = angle / (180 / Math.PI);
         return new Vector2((float) Math.Cos(angleD), (float) Math.Sin(angleD));
+    }
+    public static void Quit()
+    {
+        quitting = true;
+        Raylib.CloseWindow();
+
     }
 
     

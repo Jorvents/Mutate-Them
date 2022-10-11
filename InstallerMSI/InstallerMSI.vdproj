@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:IntsallerMsi"
+"ProjectName" = "8:InstallerMSI"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -50,6 +50,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -731,7 +739,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_C9624088756B48CBB1997888E3E78F50"
             {
-            "SourcePath" = "8:..\\src\\obj\\Release\\net6.0\\MutateThem.dll"
+            "SourcePath" = "8:..\\src\\obj\\Debug\\net6.0\\MutateThem.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1F2C7D7629934BD58964D6DE38D1706D"

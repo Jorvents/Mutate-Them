@@ -23,16 +23,20 @@ public class Enemy : Mutable
 
     public override void Work()
     {
-        if (!myEnemy.isActive || !isActive || inControl) return;
+        if (!myEnemy.isActive || /*!isActive ||*/ inControl) return;
 
         target = myEnemy.loc;
         Follow(target);
-        if (Raylib.CheckCollisionCircles(myEnemy.loc, myEnemy.radius, loc, radius)) Die();
+        if (Raylib.CheckCollisionCircles(myEnemy.loc, myEnemy.radius, loc, radius))
+        {
+            Die();
+            myEnemy.Damage(1);
+        };
     }
 
     public override void Draw()
     {
-        if (!isActive) return;
+        //if (!isActive) return;
 
         Raylib.DrawCircle((int) loc.X, (int) loc.Y, radius, colour);
         //Raylib.DrawText(_debugString, (int) loc.X - 10, (int) loc.Y - 10, 30, Color.WHITE);

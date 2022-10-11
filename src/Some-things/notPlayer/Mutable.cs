@@ -10,7 +10,8 @@ public abstract class Mutable : Something
 {
     public enum Mutables
     {
-        Throw,
+        Blank = -1, //Empty
+        Throw,      //Enemy
         Ally,
         Bomb,
         Shield,
@@ -31,7 +32,6 @@ public abstract class Mutable : Something
         //_debugIndex = whichOne;
         //_debugString = $"{whichOne}";
     }
-
     public void Follow(Vector2 that)
     {
         target = that;

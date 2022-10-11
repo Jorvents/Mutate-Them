@@ -8,7 +8,7 @@ public class Player : Something
     public Texture2D playerHands;
     public float handRotation;
     public HandPowers handpowers;
-    private int health;
+    public int health;
 
     Vector2 OrginOfHands;
     Rectangle Hands;
@@ -18,6 +18,7 @@ public class Player : Something
     {
         //Circle
         playerHands = Raylib.LoadTexture("Files/Sprites/PlayerHands.png");
+        health = 20;
         handRotation = .14f;
         Hands = new Rectangle(0, 0, 600, 600); //DONT CHANGE
         Desging = new Rectangle(loc.X, loc.Y, 100, 100);
@@ -30,6 +31,10 @@ public class Player : Something
     public void Work()
     {
         //HandRotation += 700.0f * Raylib.GetFrameTime();
+        if (health <= 0)
+        {
+            Game.Quit();
+        }
         var x = (Raylib.IsKeyDown(KeyboardKey.KEY_A) ? -1 : 0) + (Raylib.IsKeyDown(KeyboardKey.KEY_D) ? 1 : 0);
         var y = (Raylib.IsKeyDown(KeyboardKey.KEY_W) ? -1 : 0) + (Raylib.IsKeyDown(KeyboardKey.KEY_S) ? 1 : 0);
         Vector2 input = new(x, y);
@@ -51,11 +56,16 @@ public class Player : Something
     {
         //if (!IsActive) return;
         Raylib.DrawCircle((int) loc.X, (int) loc.Y, radius, colour);
+        Raylib.DrawText(health.ToString(), 15, 195, 30, Color.WHITE);
         //Raylib.DrawTextureEx(playerHands, loc, HandRotation, 0.14f, Color.WHITE);
         Raylib.DrawTexturePro(playerHands, Hands, Desging, OrginOfHands, handRotation + 134, Color.YELLOW);
 
         handpowers.Draw();
         //Raylib.DrawText(Desging.height.ToString(), 15, 15, 30, Color.WHITE);
         //Raylib.DrawText(playerHands.height.ToString(), 15, 15, 30, Color.WHITE);
+    }
+    public void Damage(int amount)
+    {
+        health = health - amount;
     }
 }

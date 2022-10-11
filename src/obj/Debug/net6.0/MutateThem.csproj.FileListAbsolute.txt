@@ -21,3 +21,5 @@ C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\obj\Debug\net6.0\ref
 C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\obj\Debug\net6.0\MutateThem.pdb
 C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\obj\Debug\net6.0\MutateThem.genruntimeconfig.cache
 C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\obj\Debug\net6.0\ref\MutateThem.dll
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Debug\net6.0\Files\Sprites\Selected.png
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Debug\net6.0\Files\Sprites\UnSelected.png

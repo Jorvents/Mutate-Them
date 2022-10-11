@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Raylib_cs;
+using System;
 
 namespace MutateThem;
 
@@ -18,19 +19,20 @@ class Window
 
         Game game = new();
 
-        var start = Game.GetTimeMs();
+        //var start = Game.GetTimeMs();
         
         while (!Raylib.WindowShouldClose())
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.BLACK);
             game.JustRun();
-            Raylib.DrawText($"{(Game.GetTimeMs() - start)/1000f}s", 500, 12, 32, Color.BLUE);
+            //Raylib.DrawText($"{(Game.GetTimeMs() - start)/1000f}s", 500, 12, 32, Color.BLUE);
             Raylib.EndDrawing();
         }
-
         Raylib.UnloadImage(icon);
         Raylib.UnloadTexture(Game.player.playerHands);
+        Raylib.UnloadTexture(Game.selected.selected);
+        Raylib.UnloadTexture(Game.selected.unselected);
         Raylib.CloseWindow();
     }
 }
