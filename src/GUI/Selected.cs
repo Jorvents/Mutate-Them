@@ -16,7 +16,8 @@ namespace MutateThem.GUI
         public Texture2D selected;
         public Texture2D unselected;
         private int mutablesCounter;
-        bool loaded = false;
+        //bool loaded = false;
+        private Color transparency = new Color(235, 235, 255, 210);
         //private Vector2[] positions;
         //Mutable source = new Mutable();
         public Selected()
@@ -46,11 +47,11 @@ namespace MutateThem.GUI
             {
                 if (i == Game.lastPressed3)
                 {
-                    Raylib.DrawTextureEx(selected, new Vector2(spacing, Raylib.GetScreenHeight() - 150), 0f, 0.5f, Color.WHITE);
+                    Raylib.DrawTextureEx(selected, new Vector2(spacing, Raylib.GetScreenHeight() - 150), 0f, 0.5f, transparency);
                 }
                 else
                 {
-                    Raylib.DrawTextureEx(unselected, new Vector2(spacing, Raylib.GetScreenHeight() - 150), 0f, 0.5f, Color.WHITE);
+                    Raylib.DrawTextureEx(unselected, new Vector2(spacing, Raylib.GetScreenHeight() - 150), 0f, 0.5f, transparency);
                 }
                 switch(i)
                 {

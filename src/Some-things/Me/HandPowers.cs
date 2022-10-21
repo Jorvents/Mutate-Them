@@ -12,8 +12,8 @@ public class HandPowers : Something //Mutating
     {
         Throw,
         Ally,
-        //Bomb,
-        //Shield,
+        Bomb,
+        Shield,
         //Teleport,
         //Heal,
     }
@@ -68,6 +68,10 @@ public class HandPowers : Something //Mutating
         {
             isActive = true;
             graberia.inControl = false;
+            if (Holder == 0) //If holding enemy
+            {
+                graberia.velocity = graberia.direction + new Vector2(-5);
+            }
         }
 
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
@@ -185,6 +189,10 @@ public class HandPowers : Something //Mutating
         Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
 
         Raylib.DrawText(Holder.ToString(), 15, 75, 30, WHITE);
+        if (Game.mutables.Any())
+        {
+            Raylib.DrawText(Game.mutables.First().velocity.ToString(), 15, 250, 30, WHITE);
+        }
         //Raylib.DrawText(Game.allies.Count.ToString(), 15, 105, 30, WHITE);
         //Raylib.DrawText(idHolding.ToString(), 15, 165, 30, WHITE);
 

@@ -29,7 +29,7 @@ public class Ally : Mutable // : Imuteable?
         if (Raylib.CheckCollisionCircles(Theclosest.loc, Theclosest.radius, loc, radius))
         {
             Theclosest.Die();
-            Console.WriteLine("Ally hit" + Theclosest.loc);
+            Console.WriteLine("Ally hit " + Theclosest.loc);
         }
     }
 

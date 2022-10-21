@@ -23,6 +23,8 @@ public abstract class Mutable : Something
     public Vector2 farness;
     public float speed;
     public bool inControl = false; //for handdpowers code
+    public Vector2 velocity = new(1);
+    public float cooldown;
     //private string _debugString;
     //public int _debugIndex;
 
@@ -37,7 +39,12 @@ public abstract class Mutable : Something
         target = that;
         farness = loc - target;
         direction = Vector2.Normalize(farness);
-        loc += direction * -speed * Raylib.GetFrameTime();
+        loc += direction * -speed * Raylib.GetFrameTime() * velocity;
+        if (velocity != new Vector2(1)) // If isnt normal velocity
+        {
+            velocity = Vector2.Lerp(velocity, new Vector2(1), Raylib.GetFrameTime() * 336); //"Slowly" make it normal again
+            //Raylib.DrawRectangle(100, 100, 100, 100, Color.YELLOW);                         It starts fricking slitting
+        }
     }
 
     public Vector2 Closest(List<Vector2> list)

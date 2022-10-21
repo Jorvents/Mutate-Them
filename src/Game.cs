@@ -37,9 +37,13 @@ class Game
 
     //public Ally[] allies;
     //public Ally alli;
+    public static int wave;
+
     public static int lastPressed3;
 
     public static Selected selected = new();
+
+    //public Button button = new();
 
     static bool quitting = false;
 
@@ -48,7 +52,7 @@ class Game
     // dictionary is a hashmap
     public static Dictionary<Keybindings, KeyboardKey> keybindings = new()
     {
-        { Press0, KEY_ZERO }, { Press1, KEY_ONE }, { Press2, KEY_TWO }, { Press3, KEY_THREE }, { Scatter1, KEY_K }, { Scatter50, KEY_O },
+        { Press0, KEY_ONE }, { Press1, KEY_TWO }, { Press2, KEY_THREE }, { Press3, KEY_FOUR }, { Scatter1, KEY_K }, { Scatter50, KEY_O },
         { Scatter5k, KEY_L }
     };
     public DebugController statsController = new();
@@ -136,6 +140,7 @@ class Game
             return e.IsDead;
         });
         player.Work();
+        //button.Work();
         /*
         allies.RemoveAll(a =>
         {
@@ -161,14 +166,16 @@ class Game
         //enemies.ForEach(e => e.Draw());
         //allies.ForEach(a => a.Draw());
         player.Draw();
-        selected.Draw();
+        selected.Draw(); //UI
+
+        //button.Draw();
         //statues.ForEach(s => s.Draw());
     }
     public void Reset() //Temporary for testing
     {
         lastPressed3 = 0;
         mutables.Clear();
-        player.health = 20;
+        player.health = 100;
         player.isActive = false;
         player.handpowers.isActive = true;
         //mutables.Add(new Ally(new(100)));

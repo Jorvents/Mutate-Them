@@ -18,7 +18,7 @@ public class Player : Something
     {
         //Circle
         playerHands = Raylib.LoadTexture("Files/Sprites/PlayerHands.png");
-        health = 20;
+        health = 1;
         handRotation = .14f;
         Hands = new Rectangle(0, 0, 600, 600); //DONT CHANGE
         Desging = new Rectangle(loc.X, loc.Y, 100, 100);
