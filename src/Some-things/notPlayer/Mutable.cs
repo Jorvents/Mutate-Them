@@ -25,6 +25,7 @@ public abstract class Mutable : Something
     public bool inControl = false; //for handdpowers code
     public Vector2 velocity = new(1);
     public float cooldown;
+    private float VelocityEffect;
     //private string _debugString;
     //public int _debugIndex;
 
@@ -42,8 +43,20 @@ public abstract class Mutable : Something
         loc += direction * -speed * Raylib.GetFrameTime() * velocity;
         if (velocity != new Vector2(1)) // If isnt normal velocity
         {
-            velocity = Vector2.Lerp(velocity, new Vector2(1), Raylib.GetFrameTime() * 336); //"Slowly" make it normal again
+            if (velocity.X > 0.8f || velocity.Y > 0.8f)
+            {
+                velocity = new Vector2(1);
+            }
+            if (VelocityEffect != 1)
+            {
+                VelocityEffect += Raylib.GetFrameTime() * 0.06f;
+            }
+            velocity = Vector2.Lerp(velocity, new Vector2(1), VelocityEffect); //"Slowly" make it normal again
             //Raylib.DrawRectangle(100, 100, 100, 100, Color.YELLOW);                         It starts fricking slitting
+        }
+        else
+        {
+            VelocityEffect = 0;
         }
     }
 
