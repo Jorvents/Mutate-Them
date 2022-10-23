@@ -69,7 +69,7 @@ public class HandPowers : Something //Mutating
         {
             if (Holder == 0) //If holding enemy
             {
-                graberia.velocity = graberia.direction + new Vector2(-8.5f);
+                graberia.GravityPush(-8.5f);
             }
             isActive = true;
             graberia.inControl = false;

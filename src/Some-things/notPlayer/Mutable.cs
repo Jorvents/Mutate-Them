@@ -71,7 +71,10 @@ public abstract class Mutable : Something
         double dy = loc.Y - vec.Y; //calculate the diffrence in y-coordinate
         return (float) Math.Sqrt(dx * dx + dy * dy); //use the distance formula to find the difference
     }
-
+    public void GravityPush(float amount)
+    {
+        velocity = direction + new Vector2(amount);
+    }
     public abstract void Work();
     public abstract void Draw();
 }
