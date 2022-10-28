@@ -27,16 +27,8 @@ class Game
     
     public static List<Mutable> mutables = new();
 
-    //public static List<Mutable> statues = new();
-    //Enemy enemy;
     public static List<Enemy> enemies;
 
-    //static public Enemy[] enemiess { get; set; }
-    //public static List<Ally> allies;
-    //static public Ally[] alliess { get; set; }
-
-    //public Ally[] allies;
-    //public Ally alli;
     public static int wave;
 
     public static int lastPressed3;
@@ -47,7 +39,7 @@ class Game
 
     static bool quitting = false;
 
-    long start = GetTimeMs();
+    public static long start = GetTimeMs();
 
     // dictionary is a hashmap
     public static Dictionary<Keybindings, KeyboardKey> keybindings = new()
@@ -123,12 +115,6 @@ class Game
 
     void Work()
     {
-        var angle = Angle(player.loc, Raylib.GetMouseX(), Raylib.GetMouseY());
-        player.handRotation = angle + 135;
-        var thisPower = player.handpowers;
-        thisPower.rotateIn = toVector(angle - 180) * thisPower.disctance;
-
-        //player.Work();
         mutables.RemoveAll(m =>
         {
             m.Work();
@@ -140,36 +126,20 @@ class Game
             return e.IsDead;
         });
         player.Work();
-        //button.Work();
-        /*
-        allies.RemoveAll(a =>
-        {
-            a.Work();
-            return a.IsDead;
-        });
-        //*/
+        selected.Work();
     }
 
     void Draw()
     {
         if (quitting) return;
-        Raylib.DrawText(Raylib.GetFPS().ToString(), 15, 15, 30, Color.WHITE);
-        //statsController.stats.
-        //statsController.Draw();
-        //Raylib.DrawText(lastPressed3.ToString(), 15, 45, 30, Color.WHITE);
+        Raylib.DrawFPS(15, 15);
         Raylib.DrawText(mutables.Count.ToString(), 15, 135, 30, Color.WHITE);
         //Raylib.DrawText(statues.Count.ToString(), 15, 345, 30, Color.WHITE);
-        Raylib.DrawText($"{(GetTimeMs() - start) / 1000f}s", 500, 12, 32, Color.BLUE);
-        //Raylib.DrawLine((int)player.loc.X, (int)player.loc.Y, Raylib.GetMouseX(), Raylib.GetMouseY(), Color.YELLOW);
+        Raylib.DrawText($"{(GetTimeMs() - start) / 1000f}s", 200, 22, 32, Color.BLUE);
         mutables.ForEach(m => m.Draw());
-        //statues.ForEach(s => s.Draw());
-        //enemies.ForEach(e => e.Draw());
-        //allies.ForEach(a => a.Draw());
         player.Draw();
         selected.Draw(); //UI
-
-        //button.Draw();
-        //statues.ForEach(s => s.Draw());
+        Raylib.DrawText(wave.ToString(), Raylib.GetScreenWidth() / 2 - 50, 20, 100, Color.WHITE);
     }
     public void Reset() //Temporary for testing
     {
@@ -178,30 +148,15 @@ class Game
         player.health = 100;
         player.isActive = false;
         player.handpowers.isActive = true;
-        //mutables.Add(new Ally(new(100)));
-        /*
-        if (allies.Count == 0)
-        {
-            allies.Add(new Ally(new Vector2(100, 100)));
-        }
-        for (int i = 0; i < allies.Count; i++)
-        {
-            allies[i] = new Ally(new Vector2(100, 100));
-            //ALL ON TOP
-        }
-        */
+        Selected.Reset();
     }
     public static void ScatterThem(int count)
     {
-        //count++;
-        //enemies = new Enemy[count];
         enemies = new List<Enemy>();
         var rndm = new Random();
 
         for (var i = 0; i < count; i++)
         {
-            //if (i == 0) return;
-            //enemies[i].loc = new Vector();
             Vector2 loc = new(rndm.Next(0, Raylib.GetScreenWidth()), rndm.Next(0, Raylib.GetScreenHeight()));
             Enemy adding = new Enemy(player, loc/*,i*/);
             adding.whichOne = i;
@@ -209,36 +164,14 @@ class Game
             mutables.Add(adding);
         }
     }
-
-    public float Angle(Vector2 first, int secondX, int secondY)
-    {
-        double angleD;
-        angleD = Math.Atan2(first.Y - secondY, first.X - secondX);
-        angleD = 180f / Math.PI * angleD;
-
-        //Math.Atan2;
-        //Math.Tau;
-        //angleD = -angleD;
-        return (float) angleD;
-    }
-
-    public Vector2 toVector(float angle)
-    {
-        double angleD = angle / (180 / Math.PI);
-        return new Vector2((float) Math.Cos(angleD), (float) Math.Sin(angleD));
-    }
     public static void Quit()
     {
         quitting = true;
         Raylib.CloseWindow();
 
     }
-
-    
-
-    //NOT USED METHODS
     public static long GetTimeMs() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-    
+    //NOT USED METHODS
     public static bool Timer(int time) // NOT DONE
     {
         var currentTime = Environment.TickCount;
@@ -249,24 +182,5 @@ class Game
         }
 
         return yesno;
-    }
-
-    public static void AddAlly( /*Vector2 location*/)
-    {
-        /*
-        int amountAllies = allies.Length;
-        allies = new Ally[amountAllies++];
-        allies[amountAllies] = new Ally();
-        */
-    }
-
-    public bool Touches(Vector2 loc1, int radius1, Vector2 loc2, int radius2)
-    {
-        return Raylib.CheckCollisionCircles(loc1, radius1, loc2, radius2);
-    }
-
-    public float Hypotenus()
-    {
-        return 0.0f;
     }
 }

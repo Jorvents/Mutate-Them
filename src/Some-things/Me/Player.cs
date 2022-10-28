@@ -48,6 +48,12 @@ public class Player : Something
         loc += input * 300 * Raylib.GetFrameTime();
         Desging = new Rectangle(loc.X, loc.Y, 90.0f, 90.0f);
 
+        var angle = Angle(loc, Raylib.GetMouseX(), Raylib.GetMouseY());
+        handRotation = angle + 135.5f;
+
+        var thisPower = handpowers;
+        thisPower.rotateIn = toVector(angle - 180) * thisPower.disctance;
+
         handpowers.stickTo = loc;
         handpowers.Work();
     }

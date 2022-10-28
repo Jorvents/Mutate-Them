@@ -3,6 +3,7 @@ using Raylib_cs;
 using System.Numerics;
 using MutateThem.Some_things.notPlayer;
 using static Raylib_cs.Color;
+using MutateThem.GUI;
 
 namespace MutateThem.Some_things.Me;
 
@@ -67,19 +68,25 @@ public class HandPowers : Something //Mutating
 
         if (rightclicked)
         {
+            graberia.inControl = false;
             if (Holder == 0) //If holding enemy
             {
-                graberia.GravityPush(-8.5f);
+                //graberia.GravityPush(-8.5f);
+                graberia.velocity = /*(graberia.direction / 20) * */ Vector2.Normalize(rotateIn) * new Vector2(-15.5f);
+            } else
+            {
+                graberia.velocity = Vector2.Normalize(rotateIn) * new Vector2(-2.5f);
             }
             isActive = true;
-            graberia.inControl = false;
         }
 
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
+            //if (graberia.onCooldown) return;
+            //Selected.Reset();
             if ((int)Holder == Game.lastPressed3) return; //Im proud of that
+            if (Selected.Cooldowns[Game.lastPressed3] != 0) return; // and that :D
             Holder = (Holding)Game.lastPressed3;
-
             graberia.Die();
             switch ((int)Holder)
             {
@@ -89,8 +96,13 @@ public class HandPowers : Something //Mutating
                 case 1:
                     graberia = new Ally(loc);
                     break;
+                case 2:
+                    graberia = new Bomb(loc);
+                    break;
             }
+            //graberia.onCooldown = true;
             Game.mutables.Add(graberia);
+            Selected.AddCooldown((int)graberia.what);
         }
         if(graberia.IsDead)
         {

@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Raylib_cs;
 
 namespace MutateThem;
@@ -25,7 +26,22 @@ public abstract class Something
         isActive = false;
         //loc = new Vector2(9999, 9999);
     }
-    
+    public float Angle(Vector2 first, int secondX, int secondY)
+    {
+        double angleD;
+        angleD = Math.Atan2(first.Y - secondY, first.X - secondX);
+        angleD = 180f / Math.PI * angleD;
+
+        //Math.Atan2;
+        //Math.Tau;
+        //angleD = -angleD;
+        return (float)angleD;
+    }
+    public Vector2 toVector(float angle)
+    {
+        double angleD = angle / (180 / Math.PI);
+        return new Vector2((float)Math.Cos(angleD), (float)Math.Sin(angleD));
+    }
     /*
     public void Draw()
     {

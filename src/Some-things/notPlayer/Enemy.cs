@@ -14,7 +14,7 @@ public class Enemy : Mutable
     public int whichOne { get; set; }
 
     //public Vector2[] vector2s { get; set; }
-    public Enemy(Player player, Vector2 loc, /*int whichOne,*/ bool isAlive = true) : base(loc, 30, Color.RED, 80, /* _debugString.parseInt(),*/ isAlive)
+    public Enemy(Player player, Vector2 loc, /*int whichOne,*/ bool isAlive = true) : base(loc, 30, Color.RED, 80, 20,/* _debugString.parseInt(),*/ isAlive)
     {
         what = Mutables.Throw;
         myEnemy = player;

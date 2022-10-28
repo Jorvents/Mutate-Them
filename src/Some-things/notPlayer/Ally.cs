@@ -17,7 +17,7 @@ public class Ally : Mutable // : Imuteable?
     //TOO LITLE INF0
     //new ALly()
     //YES
-    public Ally(Vector2 spawn) : base(spawn, 25, Color.YELLOW, 85) => what = Mutables.Ally;
+    public Ally(Vector2 spawn) : base(spawn, 25, Color.YELLOW, 85, 5) => what = Mutables.Ally;
 
     public override void Work()
     {

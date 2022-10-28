@@ -26,12 +26,14 @@ public abstract class Mutable : Something
     public Vector2 velocity = new(1);
     public float cooldown;
     private float VelocityEffect;
+    //public bool onCooldown = false;
     //private string _debugString;
     //public int _debugIndex;
 
-    public Mutable(Vector2 loc, int radius, Color colour, float speed,/* int whichOne, */bool isActive = true) : base(loc, radius, colour, isActive)
+    public Mutable(Vector2 loc, int radius, Color colour, float speed, float cooldown/* int whichOne, */, bool isActive = true) : base(loc, radius, colour, isActive)
     {
         this.speed = speed;
+        this.cooldown = cooldown;
         //_debugIndex = whichOne;
         //_debugString = $"{whichOne}";
     }
@@ -40,23 +42,25 @@ public abstract class Mutable : Something
         target = that;
         farness = loc - target;
         direction = Vector2.Normalize(farness);
-        loc += direction * -speed * Raylib.GetFrameTime() * velocity;
+        //loc += direction * -speed * Raylib.GetFrameTime() * velocity;
         if (velocity != new Vector2(1)) // If isnt normal velocity
         {
-            if (velocity.X > 0.8f || velocity.Y > 0.8f)
+            if (velocity.X > 0.88f && velocity.X < 1.22f || velocity.Y > 0.88f && velocity.Y < 1.22f)
             {
                 velocity = new Vector2(1);
             }
             if (VelocityEffect != 1)
             {
-                VelocityEffect += Raylib.GetFrameTime() * 0.06f;
+                VelocityEffect += Raylib.GetFrameTime() * .15f;
             }
-            velocity = Vector2.Lerp(velocity, new Vector2(1), VelocityEffect); //"Slowly" make it normal again
-            //Raylib.DrawRectangle(100, 100, 100, 100, Color.YELLOW);                         It starts fricking slitting
+            velocity = Vector2.Lerp(velocity, new Vector2(1), VelocityEffect);
+
+            loc += -speed * Raylib.GetFrameTime() * velocity;
         }
         else
         {
             VelocityEffect = 0;
+            loc += direction * -speed * Raylib.GetFrameTime() * velocity;
         }
     }
 
@@ -70,10 +74,6 @@ public abstract class Mutable : Something
         double dx = loc.X - vec.X; //calculate the diffrence in x-coordinate
         double dy = loc.Y - vec.Y; //calculate the diffrence in y-coordinate
         return (float) Math.Sqrt(dx * dx + dy * dy); //use the distance formula to find the difference
-    }
-    public void GravityPush(float amount)
-    {
-        velocity = direction + new Vector2(amount);
     }
     public abstract void Work();
     public abstract void Draw();

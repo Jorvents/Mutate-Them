@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0UcjHls6fzjdcs7Ye8f3xgBF8d2/v7r+sXXuJCpntBDrU2ftOEyzAHOK6q7/qXPcPpnZ3o//1tE9jTB47m+GOA==",
+  "dgSpecHash": "8X83MactXfzKIsH0Cp7tvah09RREBbFEWvqDtveQfnubbYoKaEd88ykfpALnqWFDgZU7rcpS9czPg/urzrf/Iw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\src\\MutateThem.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Jorven\\.nuget\\packages\\raylib-cs\\4.0.0.1\\raylib-cs.4.0.0.1.nupkg.sha512",
+    "C:\\Users\\Jorven\\.nuget\\packages\\raylib-cs\\4.2.0.1\\raylib-cs.4.2.0.1.nupkg.sha512",
     "C:\\Users\\Jorven\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
   ],
   "logs": []
