@@ -26,6 +26,7 @@ public abstract class Mutable : Something
     public Vector2 velocity = new(1);
     public float cooldown;
     private float VelocityEffect;
+    Mutable Theclosest;
     //public bool onCooldown = false;
     //private string _debugString;
     //public int _debugIndex;
@@ -63,18 +64,70 @@ public abstract class Mutable : Something
             loc += direction * -speed * Raylib.GetFrameTime() * velocity;
         }
     }
-
-    public Vector2 Closest(List<Vector2> list)
-    {
-        return list.Aggregate((i1, i2) => DistanceTo(i1) < DistanceTo(i2) ? i1 : i2);
-    }
-
     public float DistanceTo(Vector2 vec)
     {
         double dx = loc.X - vec.X; //calculate the diffrence in x-coordinate
         double dy = loc.Y - vec.Y; //calculate the diffrence in y-coordinate
         return (float) Math.Sqrt(dx * dx + dy * dy); //use the distance formula to find the difference
     }
+    public Mutable WhoToFollow(List<Enemy> choices)
+    {
+        //Mutable Theclosest = choices.First();
+        var closest = new Vector2(9999);
+
+        if (choices.Any())
+        {
+            //
+            //choices.Where(m => what == Mutables.Throw);
+            Theclosest = choices.Aggregate((e1, e2) => DistanceTo(e1.loc) < DistanceTo(e2.loc) ? e1 : e2);
+            /*
+            if (Theclosest.isActive)
+            {
+                Theclosest = null;
+            }
+            */
+        }
+        if (DistanceTo(closest) <= 7000)
+        {
+            Theclosest.loc = new Vector2(9999);
+            return Theclosest;
+        }
+        if (choices.Count == 0)
+        {
+            Die();
+        }
+        return Theclosest;
+
+        //if (Theclosest == null) closest = loc;
+        //if (!Theclosest.isActive) closest = Theclosest.loc;
+        //Theclosest.isTargeted = true;
+
+        /*
+        foreach (Enemy choice in choices)
+        {
+            Vector2 curr = choice.loc;
+            if (distanceTo(curr) < distanceTo(closest))
+            {
+                closest = curr;
+                Theclosest = choice;
+            }
+        }
+        */
+        /*
+        if (DistanceTo(closest) <= 7000)
+        {
+            Theclosest.loc = new Vector2(9999);
+            return Theclosest;
+        }
+        */
+        //isActive = false;
+    }
+
+    public Vector2 Closest(List<Vector2> list)
+    {
+        return list.Aggregate((i1, i2) => DistanceTo(i1) < DistanceTo(i2) ? i1 : i2);
+    }
+
     public abstract void Work();
     public abstract void Draw();
 }

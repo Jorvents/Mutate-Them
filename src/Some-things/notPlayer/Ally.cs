@@ -10,19 +10,20 @@ public class Ally : Mutable // : Imuteable?
 {
     public static readonly Vector2 Furthest = new(9999);
 
-    Enemy Theclosest { get; set; }
+    //Enemy Theclosest { get; set; }
 
     //Make the colour and size static
     //NO
     //TOO LITLE INF0
     //new ALly()
     //YES
-    public Ally(Vector2 spawn) : base(spawn, 25, Color.YELLOW, 85, 5) => what = Mutables.Ally;
+    public Ally(Vector2 spawn) : base(spawn, 25, Color.YELLOW, 88, 5) => what = Mutables.Ally;
 
     public override void Work()
     {
         if (!isActive || inControl) return;
-        Follow(WhoToFollow(Game.enemies));
+        var Theclosest = WhoToFollow(Game.enemies);
+        Follow(Theclosest.loc);
         //Theclosest.isTargeted 
         if (Theclosest == null) return;
 
@@ -36,9 +37,10 @@ public class Ally : Mutable // : Imuteable?
     public override void Draw()
     {
         //if (!isActive) return;
-        Raylib.DrawCircle((int) loc.X, (int) loc.Y, radius, colour);
+        Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
     }
 
+    /*
     public Vector2 WhoToFollow(List<Enemy> choices)
     {
 
@@ -55,33 +57,32 @@ public class Ally : Mutable // : Imuteable?
                 Theclosest = null;
             }
             */
-        } else
-        {
-            Die();
-        }
+    /*
+      } else
+      {
+          Die();
+      }
 
-        //if (Theclosest == null) closest = loc;
-        if (Theclosest != null) closest = Theclosest.loc;
-        //Theclosest.isTargeted = true;
+      //if (Theclosest == null) closest = loc;
+      if (Theclosest != null) closest = Theclosest.loc;
+      //Theclosest.isTargeted = true;
 
-        /*
-        foreach (Enemy choice in choices)
-        {
-            Vector2 curr = choice.loc;
-            if (distanceTo(curr) < distanceTo(closest))
-            {
-                closest = curr;
-                Theclosest = choice;
-            }
-        }
-        */
-        if (DistanceTo(closest) <= 7000) return closest;
+      /*
+      foreach (Enemy choice in choices)
+      {
+          Vector2 curr = choice.loc;
+          if (distanceTo(curr) < distanceTo(closest))
+          {
+              closest = curr;
+              Theclosest = choice;
+          }
+      }
+      */
+    /*
+      if (DistanceTo(closest) <= 7000) return closest;
 
-        isActive = false;
-        return loc;
-    }
-
-    public void Revive()
-    {
-    }
+      isActive = false;
+      return loc;
+  }
+  */
 }

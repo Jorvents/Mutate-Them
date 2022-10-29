@@ -68,7 +68,6 @@ namespace MutateThem.GUI
                     default:
                     drawing = new Empty(); //without it the last one drawn woudlve not work good VV
                     break;
-
                     case 0:
                     drawing = new Enemy(Game.player, new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
                     break;
@@ -83,13 +82,13 @@ namespace MutateThem.GUI
                 if (Cooldown[i] > 0f)
                 {
                     Raylib.DrawTextureEx(unselected, new Vector2(spacing, Raylib.GetScreenHeight() - 150), 0f, 0.5f, new Color(150, 150, 180, 200));
+                    int centerection = Raylib.MeasureText(Cooldown[i].ToString(), 90);
+                    Raylib.DrawText(Cooldown[i].ToString(), spacing - (centerection / 2) + 50, Raylib.GetScreenHeight() - 140, 90, Color.WHITE);
                 }
                 if (Cooldowns[i] > 0)
                 {
                     Cooldown[i] = (int)drawing.cooldown + (int)(Cooldowns[i] - ((Game.GetTimeMs() - Game.start) / 1000f));
-                    int centerection = Raylib.MeasureText(Cooldown[i].ToString() , 90);
                     //Raylib.DrawText(centerection.ToString(), 100, 100, 100, Color.WHITE);
-                    Raylib.DrawText(Cooldown[i].ToString(), spacing - (centerection / 2) + 50, Raylib.GetScreenHeight() - 140, 90, Color.WHITE);
                     if (Cooldown[i] == 0)
                     {
                         Cooldown[i] = 0f;
