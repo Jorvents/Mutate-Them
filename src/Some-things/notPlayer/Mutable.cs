@@ -17,21 +17,21 @@ public abstract class Mutable : Something
         Teleport,
         Shield,
     }
-
     public Mutables what; //ID
+
     private Vector2 target; 
     public Vector2 direction;
     private Vector2 farness;
     private float speed;
-    public bool inControl = false; //for handdpowers code
     public Vector2 velocity = new(1);
-    public float cooldown;
     private float VelocityEffect;
+
+    public bool inControl = false; //for handdpowers code
+    public float cooldown;
+
     Mutable Theclosest;
+
     public bool ability = false; //for ability mutables
-    //public bool onCooldown = false;
-    //private string _debugString;
-    //public int _debugIndex;
 
     public Mutable(Vector2 loc, int radius, Color colour, float speed, float cooldown/* int whichOne, */, bool isDead = false) : base(loc, radius, colour, isDead)
     {
@@ -66,44 +66,19 @@ public abstract class Mutable : Something
             loc += direction * -speed * Raylib.GetFrameTime() * velocity;
         }
     }
-    /*
-    public float DistanceTo(Vector2 vec)
-    {
-        double dx = loc.X - vec.X; //calculate the diffrence in x-coordinate
-        double dy = loc.Y - vec.Y; //calculate the diffrence in y-coordinate
-        return (float) Math.Sqrt(dx * dx + dy * dy); //use the distance formula to find the difference
-    }
-    */
     public Mutable WhoToFollow(List<Enemy> choices)
     {
-        //Mutable Theclosest = choices.First();
-        //var closest = new Vector2(9999);
 
         if (choices.Any())
         {
-            //
-            //choices.Where(m => what == Mutables.Throw);
             isActive = true;
             Theclosest = choices.Aggregate((e1, e2) => DistanceTo(e1.loc) < DistanceTo(e2.loc) ? e1 : e2);
-            /*
-            if (Theclosest.isActive)
-            {
-                Theclosest = null;
-            }
-            */
         } else
         {
             isActive = false;
         }
 
         return Theclosest;
-        /*
-        if (DistanceTo(closest) <= 7000)
-        {
-            Theclosest.loc = new Vector2(9999);
-            return Theclosest;
-        }
-        */
     }
 
     public Vector2 Closest(List<Vector2> list)

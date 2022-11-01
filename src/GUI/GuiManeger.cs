@@ -8,6 +8,7 @@ namespace MutateThem.GUI
 {
     public class GuiManeger
     {
+        //Health health = new();
         public GuiManeger()
         {
 
@@ -19,6 +20,7 @@ namespace MutateThem.GUI
         public void Draw()
         {
 
+            //health.Draw();
         }
     } 
 }

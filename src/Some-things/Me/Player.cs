@@ -9,6 +9,7 @@ public class Player : Something
     public float handRotation;
     public HandPowers handpowers;
     public int health;
+    public int maxhealth;
 
     Vector2 OrginOfHands;
     Rectangle Hands;
@@ -18,7 +19,8 @@ public class Player : Something
     {
         //Circle
         playerHands = Raylib.LoadTexture("Files/Sprites/PlayerHands.png");
-        health = 1;
+        maxhealth = 1000;
+        health = maxhealth;
         handRotation = .14f;
         Hands = new Rectangle(0, 0, 600, 600); //DONT CHANGE
         Desging = new Rectangle(loc.X, loc.Y, 100, 100);

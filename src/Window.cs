@@ -7,6 +7,8 @@ namespace MutateThem;
 class Window
 {
     public static Vector2 WindowSize = new(1280, 720);
+
+    public static Color backround = Color.BLACK;
     
     public void Run()
     {
@@ -24,7 +26,7 @@ class Window
         while (!Raylib.WindowShouldClose())
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.BLACK);
+            Raylib.ClearBackground(backround);
             game.JustRun();
             //Raylib.DrawText($"{(Game.GetTimeMs() - start)/1000f}s", 500, 12, 32, Color.BLUE);
             Raylib.EndDrawing();

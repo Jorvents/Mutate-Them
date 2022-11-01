@@ -34,6 +34,7 @@ class Game
     public static int lastPressed3;
 
     public static Selected selected = new();
+    Health health = new();
 
     //public Button button = new();
 
@@ -127,6 +128,7 @@ class Game
         });
         player.Work();
         selected.Work();
+        health.Work();
     }
 
     void Draw()
@@ -139,14 +141,15 @@ class Game
         mutables.ForEach(m => m.Draw());
         player.Draw();
         selected.Draw(); //UI
+        health.Draw();   //UI
         Raylib.DrawText(wave.ToString(), Raylib.GetScreenWidth() / 2 - 50, 20, 100, Color.WHITE);
-        Raylib.DrawText(player.loc.ToString(), 15, 165, 30, Color.WHITE);
+        //Raylib.DrawText(player.loc.ToString(), 15, 165, 30, Color.WHITE);
     }
     public void Reset() //Temporary for testing
     {
         lastPressed3 = 0;
         mutables.Clear();
-        player.health = 100;
+        player.health = player.maxhealth;
         player.isActive = false;
         player.handpowers.isActive = true;
         Selected.Reset();

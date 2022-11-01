@@ -50,19 +50,4 @@ public abstract class Something //GameObject
         double dy = loc.Y - vec.Y; //calculate the diffrence in y-coordinate
         return (float)Math.Sqrt(dx * dx + dy * dy); //use the distance formula to find the difference
     }
-    /*
-    public void Draw()
-    {
-        //loc.X += MoveX * Raylib.GetFrameTime();
-        //Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
-        if (isDead) return;
-        Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
-    }
-    /*
-    public void Update()
-    {
-        x += MoveX * Raylib.GetFrameTime();
-        y += MoveY * Raylib.GetFrameTime();
-    }
-    */
 }

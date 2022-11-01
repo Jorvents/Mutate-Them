@@ -83,8 +83,6 @@ public class HandPowers : Something //Mutating
 
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
-            //if (graberia.onCooldown) return;
-            //Selected.Reset();
             if ((int)Holder == Game.lastPressed3) return; //Im proud of that
             if (Selected.Cooldowns[Game.lastPressed3] != 0) return; // and that :D
             Holder = (Holding)Game.lastPressed3;
@@ -104,7 +102,6 @@ public class HandPowers : Something //Mutating
                     graberia = new Teleport(loc);
                     break;
             }
-            //graberia.onCooldown = true;
             Game.mutables.Add(graberia);
             if (graberia.what == 0)
             {
