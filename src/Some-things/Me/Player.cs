@@ -8,8 +8,9 @@ public class Player : Something
     public Texture2D playerHands;
     public float handRotation;
     public HandPowers handpowers;
-    public int health;
-    public int maxhealth;
+
+    public int maxhealth = 1000;
+    public float health;
 
     Vector2 OrginOfHands;
     Rectangle Hands;
@@ -19,7 +20,6 @@ public class Player : Something
     {
         //Circle
         playerHands = Raylib.LoadTexture("Files/Sprites/PlayerHands.png");
-        maxhealth = 1000;
         health = maxhealth;
         handRotation = .14f;
         Hands = new Rectangle(0, 0, 600, 600); //DONT CHANGE
@@ -63,7 +63,7 @@ public class Player : Something
     {
         //if (!IsActive) return;
         Raylib.DrawCircle((int) loc.X, (int) loc.Y, radius, colour);
-        Raylib.DrawText(health.ToString(), 15, 195, 30, Color.WHITE);
+        //Raylib.DrawText(health.ToString(), 15, 195, 30, Color.WHITE);
         //Raylib.DrawTextureEx(playerHands, loc, HandRotation, 0.14f, Color.WHITE);
         Raylib.DrawTexturePro(playerHands, Hands, Desging, OrginOfHands, handRotation + 134, Color.YELLOW);
 

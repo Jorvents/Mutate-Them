@@ -21,15 +21,15 @@ namespace MutateThem.GUI
         float ratio;
         public Health()
         {
-            int health = Game.player.health;
+            float health = Game.player.health;
             blood = new Rectangle(Raylib.GetScreenWidth() - widht - spacing, spacing, widht, hight);
             border = new Rectangle(blood.x - room, blood.y - room, blood.width + room * 2, blood.height + room * 2);
-            ratio = widht / Game.player.maxhealth;
+            ratio = widht / health;
 
         }
         public void Work()
         {
-            blood.width = 0.2f * Game.player.health;
+            blood.width = ratio * Game.player.health;
         }
         public void Draw()
         {
@@ -39,6 +39,11 @@ namespace MutateThem.GUI
 
             Raylib.DrawText(Game.player.health.ToString(), (int)(blood.x + widht / 2) - (Raylib.MeasureText(Game.player.health.ToString(), 50) / 2), (int)blood.y + 3, 50, Color.WHITE); //idc if messy
 
+
+            //Raylib.DrawText(ratio.ToString(), 15, 285, 30, Color.WHITE);
+            //Raylib.DrawText(widht.ToString(), 15, 315, 30, Color.WHITE);
+
+            //Raylib.DrawText((200 / 1000).ToString(), 15, 345, 30, Color.WHITE);
         }
     }
 }
