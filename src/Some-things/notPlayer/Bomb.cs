@@ -22,13 +22,14 @@ namespace MutateThem.Some_things.notPlayer
 
         public override void Work()
         {
-            if (!isActive || inControl) return;
+            if (inControl) return;
             var Theclosest = WhoToFollow(Game.enemies);
-
+            if (!isActive) return;
+            if (Theclosest == null) return;
             Follow(Theclosest.loc);
 
+            /*
             int inradius = 0;
-
             Game.enemies.ForEach(e =>
             {
                 if (Raylib.CheckCollisionCircles(e.loc, e.radius, loc, damege))
@@ -40,7 +41,7 @@ namespace MutateThem.Some_things.notPlayer
                     Explode();
                 }
             });
-
+            */
             if (Raylib.CheckCollisionCircles(Theclosest.loc, Theclosest.radius, loc, radius))
             {
                 Explode();

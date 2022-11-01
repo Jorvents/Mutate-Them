@@ -51,8 +51,7 @@ public class Player : Something
         var angle = Angle(loc, Raylib.GetMouseX(), Raylib.GetMouseY());
         handRotation = angle + 135.5f;
 
-        var thisPower = handpowers;
-        thisPower.rotateIn = toVector(angle - 180) * thisPower.disctance;
+        handpowers.rotateIn = toVector(angle - 180) * handpowers.disctance;
 
         handpowers.stickTo = loc;
         handpowers.Work();

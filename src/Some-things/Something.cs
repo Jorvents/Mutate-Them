@@ -4,26 +4,28 @@ using Raylib_cs;
 
 namespace MutateThem;
 
-public abstract class Something
+public abstract class Something //GameObject
 {
     public Vector2 loc;
     public int radius;
     public Color colour;
-    public bool isActive;
+    public bool isActive = true;
 
-    public bool IsDead => !isActive;
+    public bool isDead; //=> !isActive; //dumb
 
-    protected Something(Vector2 loc, int radius, Color colour, bool isActive = true)
+    protected Something(Vector2 loc, int radius, Color colour, bool isDead = false)
     {
         this.loc = loc;
         this.radius = radius;
         this.colour = colour;
-        this.isActive = isActive;
+        this.isDead = isDead;
+        //this.isActive = isActive;
     }
 
     public void Die()
     {
-        isActive = false;
+        //isActive = false;
+        isDead = true;
         //loc = new Vector2(9999, 9999);
     }
     public float Angle(Vector2 first, int secondX, int secondY)
@@ -41,6 +43,12 @@ public abstract class Something
     {
         double angleD = angle / (180 / Math.PI);
         return new Vector2((float)Math.Cos(angleD), (float)Math.Sin(angleD));
+    }
+    public float DistanceTo(Vector2 vec)
+    {
+        double dx = loc.X - vec.X; //calculate the diffrence in x-coordinate
+        double dy = loc.Y - vec.Y; //calculate the diffrence in y-coordinate
+        return (float)Math.Sqrt(dx * dx + dy * dy); //use the distance formula to find the difference
     }
     /*
     public void Draw()

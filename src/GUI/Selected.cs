@@ -77,7 +77,11 @@ namespace MutateThem.GUI
                     case 2:
                     drawing = new Bomb(new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
                     break;
+                    case 3:
+                    drawing = new Teleport(new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
+                    break;
                 }
+                drawing.inControl = true;
                 drawing.Draw();
                 if (Cooldown[i] > 0f)
                 {

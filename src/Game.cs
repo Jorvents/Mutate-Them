@@ -118,12 +118,12 @@ class Game
         mutables.RemoveAll(m =>
         {
             m.Work();
-            return m.IsDead;
+            return m.isDead;
         });
         enemies.RemoveAll(e => //TEMPORARY
         {
             //e.Work();
-            return e.IsDead;
+            return e.isDead;
         });
         player.Work();
         selected.Work();
@@ -140,6 +140,7 @@ class Game
         player.Draw();
         selected.Draw(); //UI
         Raylib.DrawText(wave.ToString(), Raylib.GetScreenWidth() / 2 - 50, 20, 100, Color.WHITE);
+        Raylib.DrawText(player.loc.ToString(), 15, 165, 30, Color.WHITE);
     }
     public void Reset() //Temporary for testing
     {

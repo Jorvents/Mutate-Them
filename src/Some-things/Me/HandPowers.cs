@@ -14,7 +14,7 @@ public class HandPowers : Something //Mutating
         Throw,
         Ally,
         Bomb,
-        Shield,
+        Teleport,
         //Teleport,
         //Heal,
     }
@@ -35,7 +35,7 @@ public class HandPowers : Something //Mutating
     public Holding Holder;
     //Enemy graberiaEnemy;
     //Ally graberiaAlly;
-    Mutable graberia;
+    Mutable graberia; //Holding
     //public int idHolding;
 
     public HandPowers(Vector2 loc) : base(loc, 18, BLANK)
@@ -69,6 +69,7 @@ public class HandPowers : Something //Mutating
         if (rightclicked)
         {
             graberia.inControl = false;
+            graberia.ability = true;
             if (Holder == 0) //If holding enemy
             {
                 //graberia.GravityPush(-8.5f);
@@ -99,12 +100,19 @@ public class HandPowers : Something //Mutating
                 case 2:
                     graberia = new Bomb(loc);
                     break;
+                case 3:
+                    graberia = new Teleport(loc);
+                    break;
             }
             //graberia.onCooldown = true;
             Game.mutables.Add(graberia);
+            if (graberia.what == 0)
+            {
+                Game.enemies.Add((Enemy)graberia);
+            }
             Selected.AddCooldown((int)graberia.what);
         }
-        if(graberia.IsDead)
+        if(graberia.isDead)
         {
             isActive = true;
         }
@@ -202,6 +210,7 @@ public class HandPowers : Something //Mutating
         Raylib.DrawCircle((int)loc.X, (int)loc.Y, radius, colour);
 
         Raylib.DrawText(Holder.ToString(), 15, 75, 30, WHITE);
+        //Raylib.DrawText(rotateIn.ToString(), 15, 225, 30, WHITE);
         Raylib.DrawText(isActive.ToString(), 15, 250, 30, WHITE);
         /*
         if (Game.mutables.Any())

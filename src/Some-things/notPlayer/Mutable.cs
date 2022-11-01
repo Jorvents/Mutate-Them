@@ -14,24 +14,26 @@ public abstract class Mutable : Something
         Throw,      //Enemy
         Ally,
         Bomb,
+        Teleport,
         Shield,
     }
 
-    public Mutables what;
-    public Vector2 target;
+    public Mutables what; //ID
+    private Vector2 target; 
     public Vector2 direction;
-    public Vector2 farness;
-    public float speed;
+    private Vector2 farness;
+    private float speed;
     public bool inControl = false; //for handdpowers code
     public Vector2 velocity = new(1);
     public float cooldown;
     private float VelocityEffect;
     Mutable Theclosest;
+    public bool ability = false; //for ability mutables
     //public bool onCooldown = false;
     //private string _debugString;
     //public int _debugIndex;
 
-    public Mutable(Vector2 loc, int radius, Color colour, float speed, float cooldown/* int whichOne, */, bool isActive = true) : base(loc, radius, colour, isActive)
+    public Mutable(Vector2 loc, int radius, Color colour, float speed, float cooldown/* int whichOne, */, bool isDead = false) : base(loc, radius, colour, isDead)
     {
         this.speed = speed;
         this.cooldown = cooldown;
@@ -64,21 +66,24 @@ public abstract class Mutable : Something
             loc += direction * -speed * Raylib.GetFrameTime() * velocity;
         }
     }
+    /*
     public float DistanceTo(Vector2 vec)
     {
         double dx = loc.X - vec.X; //calculate the diffrence in x-coordinate
         double dy = loc.Y - vec.Y; //calculate the diffrence in y-coordinate
         return (float) Math.Sqrt(dx * dx + dy * dy); //use the distance formula to find the difference
     }
+    */
     public Mutable WhoToFollow(List<Enemy> choices)
     {
         //Mutable Theclosest = choices.First();
-        var closest = new Vector2(9999);
+        //var closest = new Vector2(9999);
 
         if (choices.Any())
         {
             //
             //choices.Where(m => what == Mutables.Throw);
+            isActive = true;
             Theclosest = choices.Aggregate((e1, e2) => DistanceTo(e1.loc) < DistanceTo(e2.loc) ? e1 : e2);
             /*
             if (Theclosest.isActive)
@@ -86,33 +91,12 @@ public abstract class Mutable : Something
                 Theclosest = null;
             }
             */
-        }
-        if (DistanceTo(closest) <= 7000)
+        } else
         {
-            Theclosest.loc = new Vector2(9999);
-            return Theclosest;
+            isActive = false;
         }
-        if (choices.Count == 0)
-        {
-            Die();
-        }
+
         return Theclosest;
-
-        //if (Theclosest == null) closest = loc;
-        //if (!Theclosest.isActive) closest = Theclosest.loc;
-        //Theclosest.isTargeted = true;
-
-        /*
-        foreach (Enemy choice in choices)
-        {
-            Vector2 curr = choice.loc;
-            if (distanceTo(curr) < distanceTo(closest))
-            {
-                closest = curr;
-                Theclosest = choice;
-            }
-        }
-        */
         /*
         if (DistanceTo(closest) <= 7000)
         {
@@ -120,7 +104,6 @@ public abstract class Mutable : Something
             return Theclosest;
         }
         */
-        //isActive = false;
     }
 
     public Vector2 Closest(List<Vector2> list)
