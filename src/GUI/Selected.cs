@@ -21,6 +21,7 @@ namespace MutateThem.GUI
         //bool loaded = false;
         private Color transparency = new Color(235, 235, 255, 210);
         public static int adding;
+        //public Color[] iconColours;
         //public int allayCooldown;
 
         //private Vector2[] positions;
@@ -33,6 +34,9 @@ namespace MutateThem.GUI
             mutablesCounter = allofthem.Length;
             Cooldowns = new float[mutablesCounter];
             Cooldown = new float[mutablesCounter];
+            //iconColours = new Color[mutablesCounter];
+            //iconColours.ToList().Last
+            //setColours();
             /*
             positions = new Vector2[mutablesCounter];
             positions[0] = new Vector2(50, Raylib.GetScreenHeight() - 200);
@@ -80,8 +84,12 @@ namespace MutateThem.GUI
                     case 3:
                     drawing = new Teleport(new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
                     break;
+                    case 4:
+                    drawing = new Shield(new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
+                    break;
                 }
                 drawing.inControl = true;
+                drawing.colour = drawing.ogColour;
                 drawing.Draw();
                 if (Cooldown[i] > 0f)
                 {
@@ -144,6 +152,35 @@ namespace MutateThem.GUI
             //Cooldowns.add
             adding = add; // DEBUG
         }
+        /*
+        public void setColours()
+        {
+            for (int i = 0; i < mutablesCounter; i++)
+            {
+                switch (i)
+                {
+                    default:
+                        iconColours[i] = new Empty().colour; //without it the last one drawn woudlve not work good VV
+                        break;
+                    case 0:
+                        iconColours[i] = new Enemy(Game.player, new Vector2()).colour;
+                        break;
+                    case 1:
+                        iconColours[i] = new Ally(new Vector2()).colour;
+                        break;
+                    case 2:
+                        iconColours[i] = new Bomb(new Vector2()).colour;
+                        break;
+                    case 3:
+                        iconColours[i] = new Teleport(new Vector2()).colour;
+                        break;
+                    case 4:
+                        iconColours[i] = new Shield(new Vector2()).colour;
+                        break;
+                }
+            }
+        }
+        */
         public static void Reset()
         {
             Cooldowns = new float[mutablesCounter];

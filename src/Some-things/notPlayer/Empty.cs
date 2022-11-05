@@ -11,7 +11,6 @@ namespace MutateThem.Some_things.notPlayer
     {
         public Empty() : base(new System.Numerics.Vector2(), 0, Color.BLANK, 0,0) => what = Mutables.Blank;
 
-
         //very useless
         public override void Draw()
         {

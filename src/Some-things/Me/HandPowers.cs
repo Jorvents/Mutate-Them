@@ -15,6 +15,7 @@ public class HandPowers : Something //Mutating
         Ally,
         Bomb,
         Teleport,
+        Shield
         //Teleport,
         //Heal,
     }
@@ -101,7 +102,11 @@ public class HandPowers : Something //Mutating
                 case 3:
                     graberia = new Teleport(loc);
                     break;
+                case 4:
+                    graberia = new Shield(loc);
+                    break;
             }
+            graberia.inControl = true;
             Game.mutables.Add(graberia);
             if (graberia.what == 0)
             {

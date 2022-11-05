@@ -9,7 +9,7 @@ public abstract class Something //GameObject
     public Vector2 loc;
     public int radius;
     public Color colour;
-    public bool isActive = true;
+    public bool isActive = false;
 
     public bool isDead; //=> !isActive; //dumb
 

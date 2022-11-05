@@ -18,6 +18,7 @@ class Game
         Press1,
         Press2,
         Press3,
+        Press4,
         Scatter1,
         Scatter50,
         Scatter5k
@@ -45,9 +46,44 @@ class Game
     // dictionary is a hashmap
     public static Dictionary<Keybindings, KeyboardKey> keybindings = new()
     {
-        { Press0, KEY_ONE }, { Press1, KEY_TWO }, { Press2, KEY_THREE }, { Press3, KEY_FOUR }, { Scatter1, KEY_K }, { Scatter50, KEY_O },
+        { Press0, KEY_ONE }, { Press1, KEY_TWO }, { Press2, KEY_THREE }, { Press3, KEY_FOUR }, { Press4, KEY_FIVE }, { Scatter1, KEY_K }, { Scatter50, KEY_O },
         { Scatter5k, KEY_L }
     };
+
+    void KeyPressed(Keybindings keybinding)
+    {
+        switch (keybinding)
+        {
+            case Press0:
+                lastPressed3 = 0;
+                break;
+            case Press1:
+                lastPressed3 = 1;
+                break;
+            case Press2:
+                lastPressed3 = 2;
+                break;
+            case Press3:
+                lastPressed3 = 3;
+                break;
+            case Press4:
+                lastPressed3 = 4;
+                break;
+            case Scatter1:
+                Reset();
+                ScatterThem(1);
+                break;
+            case Scatter50:
+                Reset();
+                ScatterThem(50);
+                break;
+            case Scatter5k:
+                Reset();
+                ScatterThem(5000);
+                break;
+        }
+    }
+
     public DebugController statsController = new();
     public Game()
     {
@@ -81,37 +117,7 @@ class Game
         {
             if (Raylib.IsKeyPressed(value)) KeyPressed(key);
         }
-    }
-
-    void KeyPressed(Keybindings keybinding)
-    {
-        switch (keybinding)
-        {
-            case Press0:
-                lastPressed3 = 0;
-                break;
-            case Press1:
-                lastPressed3 = 1;
-                break;
-            case Press2:
-                lastPressed3 = 2;
-                break;
-            case Press3:
-                lastPressed3 = 3;
-                break;
-            case Scatter1:
-                Reset();
-                ScatterThem(1);
-                break;
-            case Scatter50:
-                Reset();
-                ScatterThem(50);
-                break;
-            case Scatter5k:
-                Reset();
-                ScatterThem(5000);
-                break;
-        }
+        //if (Raylib.GetKeyPressed)
     }
 
     void Work()
@@ -143,7 +149,26 @@ class Game
         selected.Draw(); //UI
         health.Draw();   //UI
         Raylib.DrawText(wave.ToString(), Raylib.GetScreenWidth() / 2 - 50, 20, 100, Color.WHITE);
+        //Raylib.DrawText(Raylib.GetKeyPressed().ToString(), 15, 350,30, Color.WHITE);
         //Raylib.DrawText(player.loc.ToString(), 15, 165, 30, Color.WHITE);
+        /*
+        switch (gamemode)
+        {
+            case 0:
+            DrawStart
+            break;
+            case 1:
+            Draw Main game
+            break;
+            case 2:
+            Draw Death screen
+            break;
+        }
+        if (DrawUI) 
+        {
+            
+        }
+        */
     }
     public void Reset() //Temporary for testing
     {
@@ -153,6 +178,10 @@ class Game
         player.isActive = false;
         player.handpowers.isActive = true;
         Selected.Reset();
+    }
+    public void WaveReset()
+    {
+
     }
     public static void ScatterThem(int count)
     {

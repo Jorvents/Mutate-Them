@@ -18,8 +18,6 @@ namespace MutateThem.Some_things.notPlayer
         int damege = 163;
         public Bomb(Vector2 spawn) : base(spawn, 35, Color.GRAY, 68, 2) => what = Mutables.Bomb;
         
-
-
         public override void Work()
         {
             if (inControl) return;
