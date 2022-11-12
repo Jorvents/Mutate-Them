@@ -114,8 +114,8 @@ namespace MutateThem.GUI
                     Raylib.DrawText(Cooldowns[1].ToString(), 30, 450, 30, Color.WHITE);
                 }
                 */
-                Raylib.DrawText(adding.ToString(), 30, 480, 30, Color.WHITE);
-                Raylib.DrawText(Cooldowns[Game.lastPressed3].ToString(), 30, 510, 30, Color.WHITE);
+                //Raylib.DrawText(adding.ToString(), 30, 480, 30, Color.WHITE);
+                //aylib.DrawText(Cooldowns[Game.lastPressed3].ToString(), 30, 510, 30, Color.WHITE);
                 //Cooldowns.ForEach(s => Raylib.DrawText(s.ToString(), 450, 30, 30, Color.WHITE));
                 /*
                 if (!loaded)

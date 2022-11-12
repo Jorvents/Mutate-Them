@@ -21,3 +21,7 @@ C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\obj\Release\net6.0\r
 C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\obj\Release\net6.0\MutateThem.pdb
 C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\obj\Release\net6.0\MutateThem.genruntimeconfig.cache
 C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\obj\Release\net6.0\ref\MutateThem.dll
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\Files\README\ezgif-3-8f9753c621.gif
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\Files\Shaders\glow.frag
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\Files\Sprites\Selected.png
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\Files\Sprites\UnSelected.png

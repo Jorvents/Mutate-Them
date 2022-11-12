@@ -35,6 +35,7 @@ class Window
         Raylib.UnloadTexture(Game.player.playerHands);
         Raylib.UnloadTexture(Game.selected.selected);
         Raylib.UnloadTexture(Game.selected.unselected);
+        Raylib.UnloadShader(Game.glow);
         Raylib.CloseWindow();
     }
 }

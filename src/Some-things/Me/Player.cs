@@ -9,7 +9,7 @@ public class Player : Something
     public float handRotation;
     public HandPowers handpowers;
 
-    public int maxhealth = 1000;
+    public int maxhealth = 10000;
     public float health;
 
     Vector2 OrginOfHands;
@@ -67,7 +67,7 @@ public class Player : Something
         //Raylib.DrawTextureEx(playerHands, loc, HandRotation, 0.14f, Color.WHITE);
         Raylib.DrawTexturePro(playerHands, Hands, Desging, OrginOfHands, handRotation + 134, Color.YELLOW);
 
-        handpowers.Draw();
+        //handpowers.Draw();
         //Raylib.DrawText(Desging.height.ToString(), 15, 15, 30, Color.WHITE);
         //Raylib.DrawText(playerHands.height.ToString(), 15, 15, 30, Color.WHITE);
     }

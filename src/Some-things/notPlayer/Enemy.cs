@@ -40,6 +40,8 @@ public class Enemy : Mutable
 
         Raylib.DrawCircle((int) loc.X, (int) loc.Y, radius, colour);
         //Raylib.DrawText(_debugString, (int) loc.X - 10, (int) loc.Y - 10, 30, Color.WHITE);
-        Raylib.DrawText(whichOne.ToString(), (int)loc.X - Raylib.MeasureText(whichOne.ToString(), 30) /2, (int)loc.Y - 12, 30, Color.WHITE);
+        //Raylib.EndTextureMode();
+        //Raylib.DrawText(whichOne.ToString(), (int)loc.X - Raylib.MeasureText(whichOne.ToString(), 30) /2, (int)loc.Y - 12, 30, Color.WHITE);
+        //Raylib.BeginTextureMode(Game.target);
     }
 }

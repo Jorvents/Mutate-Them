@@ -7,6 +7,7 @@ using MutateThem.Some_things.notPlayer;
 using static MutateThem.Game.Keybindings;
 using static Raylib_cs.KeyboardKey;
 using MutateThem.GUI;
+using System.ComponentModel;
 
 namespace MutateThem;
 
@@ -43,6 +44,19 @@ class Game
 
     public static long start = GetTimeMs();
 
+    public static RenderTexture2D target = Raylib.LoadRenderTexture(Raylib.GetScreenWidth(), Raylib.GetScreenHeight()); //FOR SHADER
+
+    //Shader glow = Raylib.LoadShader(string.Format("Files/Shaders/glow.vert", 330), string.Format("Files/Shaders/glow.frag", 330));
+
+    //const int GLSL_VERSION = 330;
+
+    public static Shader glow = Raylib.LoadShader(null, "Files/Shaders/glow.frag");
+
+    /*
+    float time = 0.0f;
+    int timeLoc = GetShaderLocation(shader, "uTime");
+    Raylib.SetShaderValue(shader, timeLoc, time, SHADER_UNIFORM_FLOAT);
+    */
     // dictionary is a hashmap
     public static Dictionary<Keybindings, KeyboardKey> keybindings = new()
     {
@@ -140,12 +154,27 @@ class Game
     void Draw()
     {
         if (quitting) return;
+        
+
+
+        Raylib.BeginTextureMode(target);
+        //MAKE IT GLOW
+        Raylib.ClearBackground(Window.backround);
+        mutables.ForEach(m => m.Draw());
+        player.Draw();
+        Raylib.EndTextureMode();
+
+
+        Raylib.BeginShaderMode(glow);
+        // NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
+        Raylib.DrawTextureRec(target.texture, new Rectangle(0,0, target.texture.width, -target.texture.height), new Vector2(0,0), Color.WHITE);
+        Raylib.EndShaderMode();
+        //player.handpowers.Draw();
+        //player.Draw();
         Raylib.DrawFPS(15, 15);
         Raylib.DrawText(mutables.Count.ToString(), 15, 135, 30, Color.WHITE);
         //Raylib.DrawText(statues.Count.ToString(), 15, 345, 30, Color.WHITE);
         Raylib.DrawText($"{(GetTimeMs() - start) / 1000f}s", 200, 22, 32, Color.BLUE);
-        mutables.ForEach(m => m.Draw());
-        player.Draw();
         selected.Draw(); //UI
         health.Draw();   //UI
         Raylib.DrawText(wave.ToString(), Raylib.GetScreenWidth() / 2 - 50, 20, 100, Color.WHITE);
