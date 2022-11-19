@@ -20,8 +20,13 @@ public abstract class Something //GameObject
         this.colour = colour;
         this.isDead = isDead;
         //this.isActive = isActive;
-    }
 
+        Init();
+    }
+    public void Init()
+    {
+        radius = (int)(radius * Window.multyplier.Y);
+    }
     public void Die()
     {
         //isActive = false;
@@ -34,9 +39,6 @@ public abstract class Something //GameObject
         angleD = Math.Atan2(first.Y - secondY, first.X - secondX);
         angleD = 180f / Math.PI * angleD;
 
-        //Math.Atan2;
-        //Math.Tau;
-        //angleD = -angleD;
         return (float)angleD;
     }
     public Vector2 toVector(float angle)

@@ -15,7 +15,7 @@ public class Ally : Mutable // : Imuteable?
     //TOO LITLE INF0
     //new ALly()
     //YES
-    public Ally(Vector2 spawn) : base(spawn, 25, Color.YELLOW, 88, 5) => what = Mutables.Ally;
+    public Ally(Vector2 spawn) : base(spawn, 25, Color.YELLOW, 88, 3) => what = Mutables.Ally;
 
     public override void Work()
     {
@@ -31,6 +31,7 @@ public class Ally : Mutable // : Imuteable?
         {
             Theclosest.Die();
             Console.WriteLine("Ally hit " + Theclosest.loc);
+            Die();
         }
     }
     public override void Draw()

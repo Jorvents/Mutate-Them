@@ -11,13 +11,13 @@ namespace MutateThem.Some_things.notPlayer
 {
     public class Teleport : Mutable
     {
-        float limit = 586f;
+        float limit = 586 * Window.multyplier.Y;
         //float min = 50f;
         bool tpdone = false;
         
         Color indicator = new Color(255, 255, 255, 210); // might make a indicator class out of something class and add it to mutables //SIZE //COLOUR //LOC
         //I MADE A METHOD()
-        public Teleport(Vector2 spawn) : base(spawn, 22, Color.DARKPURPLE, 0, 4) => what = Mutables.Teleport;
+        public Teleport(Vector2 spawn) : base(spawn, 22, Color.DARKPURPLE, 0, 18) => what = Mutables.Teleport;
         public override void Work()
         {
             //if (!isActive) return;
@@ -32,23 +32,6 @@ namespace MutateThem.Some_things.notPlayer
             Game.player.loc = Place;
             isActive = true;
             Die();
-            /*
-            if (Game.player.DistanceTo(Raylib.GetMousePosition()) < limit)
-            {                                                                                      //for player after tp rotation
-                locTP = Raylib.GetMousePosition() - (Vector2.Normalize(Game.player.handpowers.rotateIn) * 1.1f);
-                //Game.player.loc = Vector2.Normalize(Game.player.handpowers.rotateIn) * range + Game.player.loc;
-            }
-            else
-            {
-                locTP = Vector2.Normalize(Game.player.handpowers.rotateIn) * limit + Game.player.loc;
-            }
-
-            if (!ability) return;
-
-            Game.player.loc = locTP;
-            isActive = true;
-            Die();
-            */
         }
         public override void Draw()
         {

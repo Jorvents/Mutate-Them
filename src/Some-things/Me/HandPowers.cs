@@ -41,7 +41,7 @@ public class HandPowers : Something //Mutating
 
     public HandPowers(Vector2 loc) : base(loc, 18, BLANK)
     {
-        disctance = 88;
+        disctance = (int)(88 * Window.multyplier.Y);
         //graberiaAlly = new Ally(new Vector2(6000,6000));
         //IsActive = true;
     }
@@ -74,10 +74,10 @@ public class HandPowers : Something //Mutating
             if (Holder == 0) //If holding enemy
             {
                 //graberia.GravityPush(-8.5f);
-                graberia.velocity = /*(graberia.direction / 20) * */ Vector2.Normalize(rotateIn) * new Vector2(-15.5f);
+                graberia.SetVelocity(-22.5f);
             } else
             {
-                graberia.velocity = Vector2.Normalize(rotateIn) * new Vector2(-2.5f);
+                graberia.SetVelocity(3.3f);
             }
             isActive = true;
         }

@@ -6,18 +6,22 @@ namespace MutateThem;
 
 class Window
 {
-    public static Vector2 WindowSize = new(1280, 720);
+    public static Vector2 OgWindowSize = new(1280,720);
 
     public static Color backround = Color.BLACK;
+
+    public static Vector2 multyplier = new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight()) / OgWindowSize;
     
     public void Run()
     {
-        Raylib.InitWindow((int) WindowSize.X, (int) WindowSize.Y, "Mutate them!");
+        Raylib.InitWindow(Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), "Mutate them!");
 
         var icon = Raylib.LoadImage("Files/Sprites/Icon.png");
 
         Raylib.SetWindowIcon(icon);
         Raylib.SetTargetFPS(162);
+
+        //Raylib.SetWindowState(ConfigFlags.FLAG_FULLSCREEN_MODE);
 
         Game game = new();
 

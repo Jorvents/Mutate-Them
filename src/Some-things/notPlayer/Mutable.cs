@@ -1,4 +1,5 @@
-﻿using Raylib_cs;
+﻿using MutateThem.Some_things.Me;
+using Raylib_cs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,8 @@ public abstract class Mutable : Something
 
     public Color ogColour;
 
+    float multyplier = Window.multyplier.Y;
+
     public Mutable(Vector2 loc, int radius, Color colour, float speed, float cooldown/* int whichOne, */, bool isDead = false) : base(loc, radius, colour, isDead)
     {
         this.speed = speed;
@@ -48,6 +51,7 @@ public abstract class Mutable : Something
     public void Init()
     {
         colour = MixUpColour(colour);
+        speed = speed * multyplier;
     }
     public void Follow(Vector2 that)
     {
@@ -55,26 +59,32 @@ public abstract class Mutable : Something
         target = that;
         farness = loc - target;
         direction = Vector2.Normalize(farness);
+
         //loc += direction * -speed * Raylib.GetFrameTime() * velocity;
         if (velocity != new Vector2(1)) // If isnt normal velocity
         {
-            if (velocity.X > 0.88f && velocity.X < 1.22f || velocity.Y > 0.88f && velocity.Y < 1.22f)
+            if (VelocityEffect != 1)
+            {
+                VelocityEffect += Raylib.GetFrameTime() * .1f + (VelocityEffect / 60f);
+                velocity = Vector2.Lerp(velocity, new Vector2(1), VelocityEffect);
+            }
+            loc += -speed * Raylib.GetFrameTime() * velocity * direction;
+            if (velocity.X < 0.84f && velocity.X > 1.32f || velocity.Y < 0.84f && velocity.Y > 1.32f)
             {
                 velocity = new Vector2(1);
             }
-            if (VelocityEffect != 1)
-            {
-                VelocityEffect += Raylib.GetFrameTime() * .15f;
-            }
-            velocity = Vector2.Lerp(velocity, new Vector2(1), VelocityEffect);
-
-            loc += -speed * Raylib.GetFrameTime() * velocity;
         }
         else
         {
             VelocityEffect = 0;
             loc += direction * -speed * Raylib.GetFrameTime() * velocity;
         }
+    }
+    public void SetVelocity(float amount)
+    {
+        VelocityEffect = 0f;
+        velocity = new Vector2(-amount * (Window.multyplier.Y / 2));
+
     }
     public Mutable WhoToFollow(List<Enemy> choices)
     {
@@ -93,7 +103,7 @@ public abstract class Mutable : Something
     public void Inticator(float limit)
     {
         if (Game.player.DistanceTo(Raylib.GetMousePosition()) < limit)
-        {                                                                                      //for player after tp rotation
+        {
             Place = Raylib.GetMousePosition() - (Vector2.Normalize(Game.player.handpowers.rotateIn) * 1.1f);
             //Game.player.loc = Vector2.Normalize(Game.player.handpowers.rotateIn) * range + Game.player.loc;
         }

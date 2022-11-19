@@ -11,12 +11,15 @@ namespace MutateThem.Some_things.notPlayer
     public class Bomb : Mutable
     {
         /*
-         * Explodes if there is enough enemies in its radius
-         * Explodes if touches a enemy no matter what
-         * 
+         * Explodes if touches a enemy
+         * Only kills certain amount of enemies in circlew
         */
-        int damege = 163;
-        public Bomb(Vector2 spawn) : base(spawn, 35, Color.GRAY, 68, 2) => what = Mutables.Bomb;
+        int killstreak = 10;
+        int damege = (int)(163 * Window.multyplier.Y);
+
+        int distanceMax = 0; //for maybe kills the closest ones
+
+        public Bomb(Vector2 spawn) : base(spawn, 35, Color.GRAY, 68, 15) => what = Mutables.Bomb;
         
         public override void Work()
         {
@@ -59,10 +62,13 @@ namespace MutateThem.Some_things.notPlayer
         }
         public void Explode()
         {
+            int counter = 0;
             Game.enemies.ForEach(e =>
             {
+                counter++;
                 if (Raylib.CheckCollisionCircles(e.loc, e.radius, loc, damege))
                 {
+                    if (counter > killstreak) return;
                     e.Die();
                 }
             });

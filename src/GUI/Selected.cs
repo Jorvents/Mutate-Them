@@ -20,7 +20,6 @@ namespace MutateThem.GUI
         public static float[] Cooldown;
         //bool loaded = false;
         private Color transparency = new Color(235, 235, 255, 210);
-        public static int adding;
         //public Color[] iconColours;
         //public int allayCooldown;
 
@@ -55,17 +54,18 @@ namespace MutateThem.GUI
         }
         public void Draw()
         {
-            int spacing = 50;
+            int spacing = (int)(50 * Window.multyplier.Y);
+            int between = (int)(50 * Window.multyplier.Y);
             Mutable drawing = new Empty();
             for (int i = 0; i < mutablesCounter; i++)
             {
                 if (i == Game.lastPressed3)
                 {
-                    Raylib.DrawTextureEx(selected, new Vector2(spacing, Raylib.GetScreenHeight() - 150), 0f, 0.5f, transparency);
+                    Raylib.DrawTextureEx(selected, new Vector2(spacing, Raylib.GetScreenHeight() - 150 * Window.multyplier.Y), 0f, 0.5f * Window.multyplier.Y, transparency);
                 }
                 else
                 {
-                    Raylib.DrawTextureEx(unselected, new Vector2(spacing, Raylib.GetScreenHeight() - 150), 0f, 0.5f, transparency);
+                    Raylib.DrawTextureEx(unselected, new Vector2(spacing, Raylib.GetScreenHeight() - 150 * Window.multyplier.Y), 0f, 0.5f * Window.multyplier.Y, transparency);
                 }
                 switch (i)
                 {
@@ -73,19 +73,19 @@ namespace MutateThem.GUI
                     drawing = new Empty(); //without it the last one drawn woudlve not work good VV
                     break;
                     case 0:
-                    drawing = new Enemy(Game.player, new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
+                    drawing = new Enemy(Game.player, new Vector2(spacing + between, Raylib.GetScreenHeight() - 100 * Window.multyplier.Y));
                     break;
                     case 1:
-                    drawing = new Ally(new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
+                    drawing = new Ally(new Vector2(spacing + between, Raylib.GetScreenHeight() - 100 * Window.multyplier.Y));
                     break;
                     case 2:
-                    drawing = new Bomb(new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
+                    drawing = new Bomb(new Vector2(spacing + between, Raylib.GetScreenHeight() - 100 * Window.multyplier.Y));
                     break;
                     case 3:
-                    drawing = new Teleport(new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
+                    drawing = new Teleport(new Vector2(spacing + between, Raylib.GetScreenHeight() - 100 * Window.multyplier.Y));
                     break;
                     case 4:
-                    drawing = new Shield(new Vector2(spacing + 50, Raylib.GetScreenHeight() - 100));
+                    drawing = new Shield(new Vector2(spacing + between, Raylib.GetScreenHeight() - 100 * Window.multyplier.Y));
                     break;
                 }
                 drawing.inControl = true;
@@ -93,21 +93,20 @@ namespace MutateThem.GUI
                 drawing.Draw();
                 if (Cooldown[i] > 0f)
                 {
-                    Raylib.DrawTextureEx(unselected, new Vector2(spacing, Raylib.GetScreenHeight() - 150), 0f, 0.5f, new Color(150, 150, 180, 200));
-                    int centerection = Raylib.MeasureText(Cooldown[i].ToString(), 90);
-                    Raylib.DrawText(Cooldown[i].ToString(), spacing - (centerection / 2) + 50, Raylib.GetScreenHeight() - 140, 90, Color.WHITE);
+                    Raylib.DrawTextureEx(unselected, new Vector2(spacing, Raylib.GetScreenHeight() - 150 * Window.multyplier.Y), 0f, 0.5f * Window.multyplier.Y, new Color(150, 150, 180, 200));
+                    int centerection = Raylib.MeasureText(Cooldown[i].ToString(), (int)(90 * Window.multyplier.Y));
+                    Raylib.DrawText(Cooldown[i].ToString(), (int)(spacing - (centerection / 2) + 50 * Window.multyplier.Y), (int)(Raylib.GetScreenHeight() - 140 * Window.multyplier.Y), (int)(90 * Window.multyplier.Y), Color.WHITE);
                 }
                 if (Cooldowns[i] > 0)
                 {
                     Cooldown[i] = (int)drawing.cooldown + (int)(Cooldowns[i] - ((Game.GetTimeMs() - Game.start) / 1000f));
-                    //Raylib.DrawText(centerection.ToString(), 100, 100, 100, Color.WHITE);
                     if (Cooldown[i] == 0)
                     {
                         Cooldown[i] = 0f;
                         Cooldowns[i] = 0f;
                     }
                 }
-                spacing += 125;
+                spacing += (int)(125 * Window.multyplier.Y);
                 /*
                 if (Cooldowns.Any())
                 {
@@ -144,48 +143,12 @@ namespace MutateThem.GUI
         }
         public static void AddCooldown(int add)
         {
-            //Cooldowns.Add(add);
-            //Cooldowns = Cooldowns.Distinct().ToList();
-            //Cooldowns.InsertRange(add, (int)((int)Game.GetTimeMs() / 1000f));
-            //Cooldowns[add] = (float)Math.Round((decimal)(Game.GetTimeMs() / 1000f), 1, MidpointRounding.ToEven);
             Cooldowns[add] = (Game.GetTimeMs() - Game.start) / 1000f;
-            //Cooldowns.add
-            adding = add; // DEBUG
         }
-        /*
-        public void setColours()
-        {
-            for (int i = 0; i < mutablesCounter; i++)
-            {
-                switch (i)
-                {
-                    default:
-                        iconColours[i] = new Empty().colour; //without it the last one drawn woudlve not work good VV
-                        break;
-                    case 0:
-                        iconColours[i] = new Enemy(Game.player, new Vector2()).colour;
-                        break;
-                    case 1:
-                        iconColours[i] = new Ally(new Vector2()).colour;
-                        break;
-                    case 2:
-                        iconColours[i] = new Bomb(new Vector2()).colour;
-                        break;
-                    case 3:
-                        iconColours[i] = new Teleport(new Vector2()).colour;
-                        break;
-                    case 4:
-                        iconColours[i] = new Shield(new Vector2()).colour;
-                        break;
-                }
-            }
-        }
-        */
         public static void Reset()
         {
             Cooldowns = new float[mutablesCounter];
             Cooldown = new float[mutablesCounter];
-            adding = 0;
         }
     }
 }
