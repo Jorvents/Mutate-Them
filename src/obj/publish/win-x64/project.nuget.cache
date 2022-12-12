@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "IWd64pov5c1CzmJBIUlS2JrRC4Xd1Euf49k1PNXTvkYN4mgsOy8bVZeSAqJPqGses/DFBxdkzkTzknZabB4O9g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Jorven\\Desktop\\Coder\\C#\\MutateThem\\Mutate-Them\\src\\MutateThem.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jorven\\.nuget\\packages\\raylib-cs\\4.2.0.1\\raylib-cs.4.2.0.1.nupkg.sha512",
+    "C:\\Users\\Jorven\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Jorven\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.0\\microsoft.netcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\Jorven\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\Jorven\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.0\\microsoft.aspnetcore.app.runtime.win-x64.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Drawing;
 using System.Numerics;
 using Raylib_cs;
+using Color = Raylib_cs.Color;
 
 namespace MutateThem;
 
 public abstract class Something //GameObject
 {
     public Vector2 loc;
-    public int radius;
+    public float radius;
     public Color colour;
     public bool isActive = false;
 
+    public bool isDying; 
     public bool isDead; //=> !isActive; //dumb
 
     protected Something(Vector2 loc, int radius, Color colour, bool isDead = false)
@@ -19,7 +22,6 @@ public abstract class Something //GameObject
         this.radius = radius;
         this.colour = colour;
         this.isDead = isDead;
-        //this.isActive = isActive;
 
         Init();
     }
@@ -29,9 +31,19 @@ public abstract class Something //GameObject
     }
     public void Die()
     {
-        //isActive = false;
-        isDead = true;
-        //loc = new Vector2(9999, 9999);
+        isDying = true;
+    }
+    public void Dying()
+    {
+        if (colour.a - 800 * Raylib.GetFrameTime() * (Window.multyplier.Y / 2) > 0)
+        {
+            radius = radius + 66f * Raylib.GetFrameTime() * (Window.multyplier.Y / 2);
+            colour.a = (byte)(colour.a - 901 * Raylib.GetFrameTime() * (Window.multyplier.Y / 2));
+        } else
+        {
+            colour.a = 0;
+            isDead = true;
+        }
     }
     public float Angle(Vector2 first, int secondX, int secondY)
     {

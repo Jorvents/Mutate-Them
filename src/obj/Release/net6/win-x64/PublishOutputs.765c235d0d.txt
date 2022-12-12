@@ -1,0 +1,14 @@
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\Files\README\ezgif-3-8f9753c621.gif
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\Files\Shaders\glow.frag
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\Files\Sprites\backround.png
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\Files\Sprites\Icon.png
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\Files\Sprites\PlayerHands.png
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\Files\Sprites\Selected.png
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\Files\Sprites\UnSelected.png
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\MutateThem.exe
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\MutateThem.dll
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\MutateThem.deps.json
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\MutateThem.runtimeconfig.json
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\MutateThem.pdb
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\Raylib-cs.dll
+C:\Users\Jorven\Desktop\Coder\C#\MutateThem\Mutate-Them\src\bin\Release\net6.0\publish\raylib.dll
